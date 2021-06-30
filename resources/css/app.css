@@ -1,0 +1,7 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/*Importando estilos*/
+@import "buttons.css";
+@import "input-search.css";
