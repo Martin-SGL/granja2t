@@ -23,5 +23,21 @@ class ClienteSeeder extends Seeder
             'numero' => 0,
             'municipio_estado' => '-'
         ]);
+        Cliente::create([
+            'nombre' => 'Javier Solorzano Pérez',
+            'negocio' => 'El Cahuite',
+            'telefono' => 3123311234,
+            'calle' => 'Guerrero',
+            'numero' => 12,
+            'municipio_estado' => 'Cuauhtemoc, Colima'
+        ]);
+        Cliente::create([
+            'nombre' => 'Orlando Hernández Sánchez',
+            'negocio' => 'Pescaderia Tecoman',
+            'telefono' => 3133211234,
+            'calle' => 'Chihuahua',
+            'numero' => 54,
+            'municipio_estado' => 'Tecoman, Colima'
+        ]);
     }
 }

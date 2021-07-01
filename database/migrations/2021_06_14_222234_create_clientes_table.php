@@ -21,6 +21,7 @@ class CreateClientesTable extends Migration
             $table->string('calle',45);
             $table->integer('numero');
             $table->string('municipio_estado',50);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

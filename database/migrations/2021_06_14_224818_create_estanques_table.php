@@ -15,7 +15,9 @@ class CreateEstanquesTable extends Migration
     {
         Schema::create('estanques', function (Blueprint $table) {
             $table->id();
-            $table->string('name',20);
+            $table->string('nombre',20);
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

@@ -7,10 +7,10 @@ use Livewire\WithPagination;
 class Clientes extends Component
 {
     use WithPagination;
-    public $open=false, $search, $pag=10;
+    public $open=false, $open_destroy=false, $search, $pag=10;
     public $cliente_id, $nombre, $negocio, $telefono, $calle, $numero, $municipio_estado; 
     //Agregar o Editar
-    public $action = 'Agregar';
+    public $action = 'Agregar', $cliente_inicial;
 
     protected $rules = [
         'nombre' => 'required|max:50',
@@ -40,6 +40,10 @@ class Clientes extends Component
     public function updatingSearch()
     {
         $this->resetPage();
+    }
+
+    public function mount(){
+        $this->cliente_inicial = new Cliente();
     }
 
     public function render()
@@ -96,15 +100,32 @@ class Clientes extends Component
             'numero' => $this->numero,
             'municipio_estado' => $this->municipio_estado]);
         
-        $this->reset(['nombre','negocio','telefono','calle','numero','municipio_estado']);
+        $this->reset(['open','nombre','negocio','telefono','calle','numero','municipio_estado']);
         $this->emit('confirm','Cliente actualizado con exito');
-        $this->open = false;
+       
+    }
+
+    public function destroy(Cliente $cliente)
+    {
+        $this->open_destroy = true;
+        $this->cliente_inicial = $cliente;
+          
+    }
+
+    public function destroy_confirmation()
+    {
+        $this->cliente_inicial->delete();
+        $this->resetValidation();
+        $this->cliente_inicial = new Cliente();
+        $this->reset('open_destroy');
+        $this->emit('confirm','Cliente eliminado con exito');
+        
     }
 
     public function init($open=false)
     {
         $this->open = $open;
         $this->resetValidation();
-        $this->reset(['action','nombre','negocio','telefono','calle','numero','municipio_estado']);
+        $this->reset(['open_destroy','action','nombre','negocio','telefono','calle','numero','municipio_estado']);
     }
 }

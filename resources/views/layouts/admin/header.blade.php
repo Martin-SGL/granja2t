@@ -31,8 +31,9 @@
               class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:border-gray-700 dark:text-gray-300 dark:bg-gray-700"
               aria-label="submenu"
             >
-              <li class="flex">
+              <li x-data="{active:'{{Route::currentRouteName()}}'}" class="flex">
                 <a
+                  :class="{'bg-gray-200': active == 'profile.show'}"
                   class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                   href="{{ route('profile.show') }}"
                 >
@@ -42,7 +43,7 @@
               </li>
               <li class="flex">
                  <!-- Authentication -->
-                 <form method="POST" action="{{ route('logout') }}">
+                 <form method="POST" class="w-full" action="{{ route('logout') }}">
                   @csrf
                   <a
                     class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"

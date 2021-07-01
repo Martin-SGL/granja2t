@@ -22,6 +22,8 @@
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <!-- No mostrar elementos componentes alpine cuanod se recarga la página -->
+    <style>[x-cloak] { display: none;}</style>
 
     
 

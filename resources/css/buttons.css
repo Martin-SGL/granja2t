@@ -6,6 +6,10 @@
     @apply px-3 py-2 rounded-lg bg-blue-600 ml-2 text-white font-bold hover:opacity-70;
 }
 
-.btn_close{
+.btn_delete{
     @apply px-3 py-2 rounded-lg bg-red-600 ml-2 text-white font-bold hover:opacity-70;
+}
+
+.btn_close{
+    @apply px-3 py-2 rounded-lg bg-gray-600 ml-2 text-white font-bold hover:opacity-70;
 }
