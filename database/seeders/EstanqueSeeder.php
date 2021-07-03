@@ -16,6 +16,7 @@ class EstanqueSeeder extends Seeder
         for($i=1;$i<=12;$i++){
             Estanque::create([
                 'nombre' => "Estanque $i",
+                'tipo' => 1
             ]);
         }
     }

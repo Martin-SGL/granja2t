@@ -8,6 +8,7 @@
                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                     <th class="py-3 px-6 text-left">#</th>
                     <th class="py-3 px-6 text-left">Nombre</th>
+                    <th class="py-3 px-6 text-left">Tipo</th>
                     <th class="py-3 px-6 text-left">Acciones</th>
                 </tr>
             </thead>
@@ -29,10 +30,18 @@
                         </td>
                         <td class="py-3 px-6 text-left">
                             <div class="flex items-center">
+                                @if($estanque->tipo==1){{'Interno'}} @else {{'Externo'}} @endif
+                            </div>
+                        </td>
+                        <td class="py-3 px-6 text-left">
+                            <div class="flex items-center">
                                 <button wire:click="edit({{ $estanque }})" title="Editar estanque"
                                     class="btn_edit"><i class="fas fa-edit"></i></button>
-                                <button wire:click="destroy({{ $estanque }})" title="Eliminar estanque"
+                                @if ($estanque->tipo==0)
+                                    <button wire:click="destroy({{ $estanque }})" title="Eliminar estanque"
                                     class="btn_delete"><i class="fas fa-trash-alt"></i></button>
+                                @endif
+                                
                             </div>
                         </td>
                     </tr>
@@ -59,6 +68,20 @@
             <input class="mb-3 w-full input_text" wire:model.defer="nombre" type="text" maxlength="20"
                 placeholder="Estanque 1">
             @error('nombre')
+                <span class=" text-sm text-red-600">{{ $message }}</span>
+            @enderror
+            <label class="block mb-2 font-semibold" for="">Tipo: </label>
+            <div class="flex">
+                <div class="mx-3">
+                    <label class="cursor-pointer" for="interno">Interno
+                    <input class="cursor-pointer" wire:model="tipo" id="interno" name="tipo" type="radio"  value="1"></label> 
+                </div>
+                <div class="mx-3">
+                    <label class="cursor-pointer" for="externo">Externo
+                    <input class="cursor-pointer" wire:model="tipo" id="externo" name="tipo" type="radio"  value="0"></label>
+                </div>
+            </div>
+            @error('tipo')
                 <span class=" text-sm text-red-600">{{ $message }}</span>
             @enderror
         </x-slot>

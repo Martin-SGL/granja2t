@@ -16,6 +16,7 @@ class CreateEstanquesTable extends Migration
         Schema::create('estanques', function (Blueprint $table) {
             $table->id();
             $table->string('nombre',20);
+            $table->enum('tipo',[1,0])->default(1); #1 = Interno, 0=Externo
             $table->softDeletes();
             $table->timestamps();
         });

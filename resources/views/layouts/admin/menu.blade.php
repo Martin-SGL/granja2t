@@ -3,7 +3,8 @@ $menu = collect([
     ['titulo' => 'Resumen', 'icono' => 'fas fa-chart-line','route' => 'admin.index'], 
     ['titulo' => 'Ventas', 'icono' => 'fas fa-money-check-alt','route' =>'admin.ventas.index'],
     ['titulo' => 'Clientes', 'icono' => 'fas fa-user-tie','route' => 'admin.clientes.index'],
-    ['titulo' => 'Estanques', 'icono' => 'fas fa-fish','route' => 'admin.estanques.index']
+    ['titulo' => 'Estanques', 'icono' => 'fas fa-fish','route' => 'admin.estanques.index'],
+    ['titulo' => 'Mermas', 'icono' => 'fas fa-skull','route' => 'admin.mermas.index']
 ]); 
 ?>
 <!-- Desktop sidebar -->

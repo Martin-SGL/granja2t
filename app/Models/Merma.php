@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Mermas extends Model
+class Merma extends Model
 {
     use HasFactory;
     protected $fillable = ['cantidad','fecha','estanque_id'];

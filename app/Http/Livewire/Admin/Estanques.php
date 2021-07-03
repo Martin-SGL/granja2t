@@ -9,10 +9,10 @@ class Estanques extends Component
 {
     use WithPagination;
     public $open=false, $open_destroy=false, $pag=10;
-    public $estanque_id, $nombre, $action= 'Agregar', $estanque_inicial;
+    public $estanque_id, $nombre, $tipo=1, $action= 'Agregar', $estanque_inicial;
     
     protected $rules = [
-        'nombre' => 'required|max:20',
+        'nombre' => 'required|max:20'
     ];
 
     protected $messages = [
@@ -33,12 +33,12 @@ class Estanques extends Component
     {
         $this->validate();
         Estanque::create([
-            'nombre' => $this->nombre
+            'nombre' => $this->nombre,
+            'tipo' => $this->tipo
         ]);
 
-        $this->reset(['nombre']);
+        $this->reset(['tipo','nombre','open']);
         $this->emit('confirm','Estanque agregado con exito');
-        $this->open = false;
     }
 
     public function edit(Estanque $estanque)
@@ -46,6 +46,7 @@ class Estanques extends Component
         $this->resetValidation();
         $this->estanque_id = $estanque->id;
         $this->nombre = $estanque->nombre;
+        $this->tipo = $estanque->tipo;
         $this->action = 'Editar';
         $this->open = true;
         
@@ -56,9 +57,11 @@ class Estanques extends Component
         $this->validate();
         Estanque::where('id', $this->estanque_id)
         ->update([
-            'nombre' => $this->nombre]);
+            'nombre' => $this->nombre,
+            'tipo' => $this->tipo
+        ]);
         
-        $this->reset(['open','nombre']);
+        $this->reset(['open','nombre','tipo']);
         $this->emit('confirm','Estanque actualizado con exito');
        
     }
@@ -84,6 +87,6 @@ class Estanques extends Component
     {
         $this->open = $open;
         $this->resetValidation();
-        $this->reset(['open_destroy','action','nombre']);
+        $this->reset(['open_destroy','action','nombre','tipo']);
     }
 }

@@ -10,7 +10,7 @@ class Estanque extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['nombre'];
+    protected $fillable = ['nombre','tipo'];
 
     //relacion uno a muchos
     public function mermas()
