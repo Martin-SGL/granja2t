@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNominaDiaTable extends Migration
+class CreateEmpleadoNominaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateNominaDiaTable extends Migration
      */
     public function up()
     {
-        Schema::create('nomina_dia', function (Blueprint $table) {
+        Schema::create('empleado_nomina', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('empleado_id');
             $table->unsignedBigInteger('nomina_id');
-            $table->unsignedBigInteger('dia_id');
-            $table->unique('nomina_id','dia_id');
+            $table->enum('recurso',[1,2])->default(1); #1 = Granja 2T, 2 = VQ
             $table->timestamps();
 
+            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('RESTRICT');
             $table->foreign('nomina_id')->references('id')->on('nominas')->onDelete('RESTRICT');
-            $table->foreign('dia_id')->references('id')->on('dias')->onDelete('RESTRICT');
-
         });
     }
 
@@ -33,6 +32,6 @@ class CreateNominaDiaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nomina_dia');
+        Schema::dropIfExists('empleado_nomina');
     }
 }

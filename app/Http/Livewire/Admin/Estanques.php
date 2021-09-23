@@ -76,7 +76,6 @@ class Estanques extends Component
     public function destroy_confirmation()
     {
         $this->estanque_inicial->delete();
-        $this->resetValidation();
         $this->estanque_inicial = new Estanque();
         $this->reset('open_destroy');
         $this->emit('confirm','Estanque eliminado con exito');

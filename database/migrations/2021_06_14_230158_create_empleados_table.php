@@ -16,13 +16,14 @@ class CreateEmpleadosTable extends Migration
         Schema::create('empleados', function (Blueprint $table) {
             $table->id();
             $table->string('nombre',50);
-            $table->integer('telefono');
+            $table->bigInteger('telefono');
             $table->string('calle',45);
             $table->integer('numero');
             $table->string('municipio_estado',45);
             $table->string('puesto',20);
             $table->decimal('salario_dia',$precision = 8, $scale = 2);
-            $table->enum('estatus',[1,0])->default(1);
+            $table->enum('estatus',[1,0])->default(1); #1 = activo, 0 = inactivo
+            $table->softDeletes();
             $table->timestamps();
         });
     }

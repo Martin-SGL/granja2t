@@ -15,14 +15,15 @@ class Mermas extends Component
     public $mode=1; #1 = resumen #2 = detalle
 
     protected $rules = [
-        'cantidad' => 'required|max:100000000',
+        'cantidad' => 'required|max:8|not_in:0',
         'fecha' => 'required',
         'estanque_merma' => 'required'
     ];
 
     protected $messages = [
         'cantidad.required' => 'El campo cantidad es requerido',
-        'cantidad.max' => 'El campo cantidad debe ser menor o igual a 100000000',
+        'cantidad.max' => 'El campo cantidad es muy grande',
+        'cantidad.not_in' => 'El campo cantidad debe ser mayor a 0',
         'fecha.required' => 'El campo fecha es requerido',
         'estanque_merma.required' => 'El campo estanque es requerido'
     ];
@@ -96,7 +97,6 @@ class Mermas extends Component
     public function destroy_confirmation()
     {
         $this->merma_inicial->delete();
-        $this->resetValidation();
         $this->merma_inicial = new Merma();
         $this->reset('open_destroy');
         $this->emit('confirm','Merma eliminada con exito');

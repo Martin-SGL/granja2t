@@ -1,14 +1,16 @@
 <?php
 $menu = collect([
-    ['titulo' => 'Resumen', 'icono' => 'fas fa-chart-line','route' => 'admin.index'], 
-    ['titulo' => 'Ventas', 'icono' => 'fas fa-money-check-alt','route' =>'admin.ventas.index'],
-    ['titulo' => 'Clientes', 'icono' => 'fas fa-user-tie','route' => 'admin.clientes.index'],
-    ['titulo' => 'Estanques', 'icono' => 'fas fa-fish','route' => 'admin.estanques.index'],
-    ['titulo' => 'Mermas', 'icono' => 'fas fa-skull','route' => 'admin.mermas.index']
+    ['titulo' => 'Resumen', 'icono' => 'fas fa-chart-line','route' => 'admin.index','r_create' => '','r_edit' => ''], 
+    ['titulo' => 'Ventas', 'icono' => 'fab fa-stripe-s','route' =>'admin.ventas.index','r_create' => 'admin.ventas.create','r_edit' => 'admin.ventas.edit'],
+    ['titulo' => 'Clientes', 'icono' => 'fas fa-user-tie','route' => 'admin.clientes.index','r_create' => '','r_edit' => 't'],
+    ['titulo' => 'Estanques', 'icono' => 'fas fa-fish','route' => 'admin.estanques.index','r_create' => '','r_edit' => ''],
+    ['titulo' => 'Mermas', 'icono' => 'fas fa-skull','route' => 'admin.mermas.index', 'r_create' => '','r_edit' => ''],
+    ['titulo' => 'Empleados', 'icono' => 'fas fa-user-astronaut','route' => 'admin.empleados.index', 'r_create' => '','r_edit' => ''],
+    ['titulo' => 'Nomina', 'icono' => 'fas fa-money-check-alt','route' => 'admin.nominas.index', 'r_create' => '','r_edit' => '']
 ]); 
 ?>
 <!-- Desktop sidebar -->
-<aside x-data="{active:'{{Route::currentRouteName()}}'}" class="z-20 hidden w-64 text-center overflow-y-auto bg-gray-600 lg:block">
+<aside x-data="{active:'{{ Route::currentRouteName()}}'}" class="z-20 hidden w-64 flex-shrink-0 text-center overflow-y-auto bg-gray-600 lg:block">
     <div class="py-4 block text-white">
         <a class="block text-lg font-bold transition-all duration-500 transform hover:-translate-y-1" href="{{route('home')}}" title="Ir a inicio">
           <i class=" mr-1 fas fa-home"></i>
@@ -23,7 +25,6 @@ $menu = collect([
                     </a>
                 </li>
             @endforeach
-
         </ul>
     </div>
 </aside>

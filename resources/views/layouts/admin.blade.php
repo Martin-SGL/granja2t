@@ -30,11 +30,12 @@
 </head>
 
 <body>
-    <div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
+    <div class="flex h-screen bg-gray-50" :class="{ 'overflow-hidden': isSideMenuOpen }">
         <!-- menu escritorio y movil -->
         @include('layouts.admin.menu')
+       
     
-        <div class="flex flex-col flex-1 w-full">
+        <div class="flex flex-col w-full overflow-x-hidden">
             <!-- parte superior -->
             @include('layouts.admin.header')
 
@@ -51,18 +52,19 @@
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     {{--funcion de data para el layout admin --}}
     
-    {{--@if(session('info'))
+    @if(session('info'))
         <script>
-            let mensaje = "{{session('info')}}";
+            let mensaje_sesion = "{{session('info')}}";
         </script>
         {{ Session::forget('info') }}     
     @else
         <script>
-            let mensaje = "";
+            let mensaje_sesion = "";
         </script>
-    @endif--}}
+    @endif
     
     <script>
+        if(mensaje_sesion!=""){alertify.success(mensaje_sesion);}
         Livewire.on('confirm', mensaje => {
             alertify.success(mensaje);
         })
@@ -133,7 +135,6 @@
     </script>
 
     @stack('js')
-
 </body>
 
 </html>

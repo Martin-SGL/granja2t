@@ -19,7 +19,6 @@ class CreateTemporadasTable extends Migration
             $table->date('fecha');
             $table->unsignedBigInteger('empleado_id');
             $table->timestamps();
-
             $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('RESTRICT');
         });
     }

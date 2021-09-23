@@ -124,7 +124,7 @@
                 <span class=" text-sm text-red-600">{{$message}}</span>
             @enderror
             <label class="block mb-2 font-semibold"   for="">Telefono: </label> 
-            <input class="mb-3 w-full input_text" wire:model.defer="telefono"  type="number" min="1" max="2" placeholder="3133333243">
+            <input class="mb-3 w-full input_text" wire:model.defer="telefono"  type="number"  placeholder="3133333243">
             @error('telefono')
                 <span class=" text-sm text-red-600">{{$message}}</span>
             @enderror
@@ -134,7 +134,7 @@
                 <span class=" text-sm text-red-600">{{$message}}</span>
             @enderror
             <label class="block mb-2 font-semibold"  for="">Numero: </label> 
-            <input class="mb-3 w-full input_text" wire:model.defer="numero" type="number" min="1" max="7"  placeholder="57">
+            <input class="mb-3 w-full input_text" wire:model.defer="numero" type="number"   placeholder="57">
             @error('numero')
                 <span class=" text-sm text-red-600">{{$message}}</span>
             @enderror

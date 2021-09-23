@@ -18,10 +18,10 @@ class Estanque extends Model
         return $this->hasMany(Merma::class);
     }
 
-    //relacion muchos a muchos
+    //relacion uno a muchos
     public function ventas()
     {
-        return $this->belongsToMany(Venta::class);
+        return $this->hasMany(Venta::class);
     }
 
 }

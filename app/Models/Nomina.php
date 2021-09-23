@@ -9,17 +9,11 @@ class Nomina extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['cantidad_dias','salario_dia','total','recurso','empleado_id'];
-
-    //relación uno a muchos inversa
-    public function empleado()
-    {
-        return $this->belongsTo(Empleado::class);
-    }
+    protected $fillable = ['cantidad_dias','salario_dia','total','lun','mar','mie','jue','vie','sab','dom','ini_sem','fin_sem'];
 
     //relación muchos a muchos 
-    public function dias()
+    public function empleados()
     {
-        return $this->belongsToMany(Dia::class);
+        return $this->belongsToMany(Empleado::class);
     }
 }

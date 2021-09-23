@@ -8,17 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Venta extends Model
 {
     use HasFactory;
-    protected $fillable = ['kilos','piezas','fecha','precio','cliente_id'];
+    protected $fillable = ['kilos','piezas','fecha','precio','total','cliente_id','estanque_id'];
 
     //relación uno a muchos inversa
     public function cliente()
     {
-        return $this->belongsTo(Cliente::class);
+        return $this->belongsTo(Cliente::class)->withTrashed();
     }
 
-    //relacion muchos a muchos
-    public function estanques()
+    //relación uno a muchos inversa
+    public function estanque()
     {
-        return $this->belongsToMany(Estanque::class);
+        return $this->belongsTo(Estanque::class);
     }
+
+    
 }

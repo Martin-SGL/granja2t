@@ -18,7 +18,7 @@ class Clientes extends Component
         'telefono' => 'required|size:10',
         'calle' => 'required:max:45',
         'numero' => 'required|max:7',
-        'municipio_estado' => 'required:50',
+        'municipio_estado' => 'required|max:50',
     ];
 
     protected $messages = [
@@ -115,7 +115,6 @@ class Clientes extends Component
     public function destroy_confirmation()
     {
         $this->cliente_inicial->delete();
-        $this->resetValidation();
         $this->cliente_inicial = new Cliente();
         $this->reset('open_destroy');
         $this->emit('confirm','Cliente eliminado con exito');

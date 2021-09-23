@@ -218,7 +218,7 @@
                             <option value="{{ $estanque->id }}">{{ $estanque->nombre }}</option>
                         @endforeach
                     </select>
-                    @error('cantidad')
+                    @error('estanque_merma')
                         <span class=" text-sm text-red-600">{{ $message }}</span>
                     @enderror
                 </x-slot>

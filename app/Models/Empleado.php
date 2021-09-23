@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Empleado extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = ['nombre','telefono','calle','numero','municipio_estado','puesto','salario_dia','estatus'];
 
@@ -17,9 +19,9 @@ class Empleado extends Model
         return $this->hasMany(Temporada::class);
     }
 
-    //releacion uno a muchos
+    //relación muchos a muchos 
     public function nominas()
     {
-        return $this->hasMany(Nomina::class);
+        return $this->belongsToMany(Nomina::class);
     }
 }
