@@ -11,7 +11,7 @@ class Empleado extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['nombre','telefono','calle','numero','municipio_estado','puesto','salario_dia','estatus'];
+    protected $fillable = ['nombre','telefono','calle','numero','municipio_estado','puesto_id','salario_dia','estatus','descanzar'];
 
     //relación uno a muchos
     public function temporadas()
@@ -23,5 +23,10 @@ class Empleado extends Model
     public function nominas()
     {
         return $this->belongsToMany(Nomina::class);
+    }
+
+    public function puesto()
+    {
+        return $this->belongsTo(Puesto::class);
     }
 }

@@ -13,5 +13,9 @@ Route::get('clientes', [ClienteController::class, 'index'])->name('admin.cliente
 Route::get('estanques', [EstanqueController::class, 'index'])->name('admin.estanques.index');
 Route::get('mermas', [MermaController::class, 'index'])->name('admin.mermas.index');
 Route::get('empleados', [EmpleadoController::class, 'index'])->name('admin.empleados.index');
-Route::get('nominas', [NominaController::class, 'index'])->name('admin.nominas.index');
-Route::resource('ventas', VentaController::class)->names('admin.ventas');
+
+Route::resource('ventas',VentaController::class)->names('admin.ventas');
+
+Route::get('nominas', [NominaController::class,'index'])->name('admin.nominas.index');
+Route::get('nominas/create/{semana}', [NominaController::class,'create'])->name('admin.nominas.create');
+Route::post('nominas/store', [NominaController::class,'store'])->name('admin.nominas.store');

@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
 use App\Models\Empleado;
+use App\Models\Puesto;
 use App\Models\Temporada;
 use Livewire\WithPagination;
 
@@ -11,7 +12,7 @@ class Empleados extends Component
 {
     use WithPagination;
     public $open=false, $open_destroy=false, $pag=10;
-    public $empleado_id, $nombre, $telefono, $calle, $numero, $municipio_estado, $puesto, $salario_dia, $fecha, $estatus; 
+    public $empleado_id, $nombre, $telefono, $calle, $numero, $municipio_estado, $puesto_id, $salario_dia, $fecha, $estatus;
     //Agregar o Editar
     public $action = 'Agregar', $empleado_inicial;
 
@@ -21,7 +22,7 @@ class Empleados extends Component
         'calle' => 'required:max:45',
         'numero' => 'required|max:7',
         'municipio_estado' => 'required|max:45',
-        'puesto' => 'required|max:20',
+        'puesto_id' => 'required',
         'salario_dia' => 'required|max:8',
         'fecha' => 'required'
     ];
@@ -37,8 +38,7 @@ class Empleados extends Component
         'numero.max' => 'El campo numero no debe pasar de 7 dígitos',
         'municipio_estado.required' => 'El campo municipio y estado es requerido',
         'municipio_estado.max' => 'El campo municipio y estado es muy largo',
-        'puesto.required' => 'El campo puesto es requerido',
-        'puesto.max' => 'El campo puesto es muy largo',
+        'puesto_id.required' => 'El campo puesto es requerido',
         'salario_dia.required' => 'El campo salario por dia es requerido',
         'salario_dia.max' => 'El campo salario por dia no debe tener mas de 8 digitos',
         'fecha.required' => 'El campo fecha es requerido'
@@ -54,7 +54,8 @@ class Empleados extends Component
     public function render()
     {
         $empleados = Empleado::paginate($this->pag);
-        return view('livewire.admin.empleados', compact('empleados'));
+        $puestos = Puesto::all();
+        return view('livewire.admin.empleados', compact('empleados','puestos'));
     }
 
     public function store()
@@ -67,7 +68,7 @@ class Empleados extends Component
             'calle' => $this->calle,
             'numero' => $this->numero,
             'municipio_estado' => $this->municipio_estado,
-            'puesto' => $this->puesto,
+            'puesto_id' => $this->puesto_id,
             'salario_dia' => $this->salario_dia,
             'salario' => $this->salario_dia,
         ]);
@@ -78,7 +79,7 @@ class Empleados extends Component
         ]);
 
         $this->fecha = date('Y-m-d');
-        $this->reset(['open','open_destroy','action','nombre','telefono','calle','numero','municipio_estado','puesto','salario_dia']);
+        $this->reset(['open','open_destroy','action','nombre','telefono','calle','numero','municipio_estado','puesto_id','salario_dia']);
         $this->emit('confirm','Empleado agregado con exito');
     }
 
@@ -93,7 +94,7 @@ class Empleados extends Component
         $this->calle = $empleado->calle;
         $this->numero = $empleado->numero;
         $this->municipio_estado = $empleado->municipio_estado;
-        $this->puesto = $empleado->puesto;
+        $this->puesto_id = $empleado->puesto_id;
         $this->salario_dia = $empleado->salario_dia;
         $this->fecha  = $empleado->temporadas->last()->fecha;
         
@@ -109,7 +110,7 @@ class Empleados extends Component
             'calle' => $this->calle,
             'numero' => $this->numero,
             'municipio_estado' => $this->municipio_estado,
-            'puesto' => $this->puesto,
+            'puesto_id' => $this->puesto_id,
             'salario_dia' => $this->salario_dia,
         ]);
 
@@ -119,7 +120,7 @@ class Empleados extends Component
         ]);
 
         $this->fecha = date('Y-m-d');
-        $this->reset(['open','open_destroy','action','nombre','telefono','calle','numero','municipio_estado','puesto','salario_dia']);
+        $this->reset(['open','open_destroy','action','nombre','telefono','calle','numero','municipio_estado','puesto_id','salario_dia']);
         $this->emit('confirm','Empleado actualizado con exito');
 
     }
@@ -152,6 +153,19 @@ class Empleados extends Component
         $this->open = $open;
         $this->resetValidation();
         $this->fecha = date('Y-m-d');
-        $this->reset(['open_destroy','action','nombre','telefono','calle','numero','municipio_estado','puesto','salario_dia']);
+        $this->reset(['open_destroy','action','nombre','telefono','calle','numero','municipio_estado','puesto_id','salario_dia']);
+    }
+
+    public function descanzar(Empleado $empleado, $valor)
+    {
+        $empleado->estatus = "$valor";
+        $empleado->save();
+
+        if( $valor==1){
+            $this->emit('confirm',"Cliente descanzado con exito");
+        }else{
+            $this->emit('confirm','Cliente recontratado con exito');
+        }
+       
     }
 }

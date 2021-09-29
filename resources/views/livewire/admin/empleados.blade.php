@@ -10,6 +10,7 @@
                     <th width="20px" class="py-3 px-6 text-left">#</th>
                     <th class="py-3 px-6 text-left"><i class="fas fa-info"></i> - Personal</th>
                     <th class="py-3 px-6 text-left"><i class="fas fa-info"></i> - Trabajo</th>
+                    <th class="py-3 px-6 text-left">Descanzar</th>
                     <th width="40px" class="py-3 px-6 text-left">Acciones</th>
                 </tr>
             </thead>
@@ -35,12 +36,20 @@
                         <td class="py-3 px-6 text-left">
                             <div class="flex items-center">
                                 <ul>
-                                    <li><span class="font-bold">Puesto: </span> {{$empleado->puesto}}</li>
+                                    <li><span class="font-bold">Puesto: </span> {{$empleado->puesto->nombre}}</li>
                                     <li><span class="font-bold">Salario: </span>$ {{$empleado->salario_dia}}</li>
-                                    <li><span class="font-bold">Estatus: </span> {{ $empleado->estatus==1 ? 'Activo' : 'Despedido'}}</li>
+                                    <li><span class="font-bold">Estatus: </span> {{ $empleado->estatus==2 ? 'Activo' : 'Descanzado'}}</li>
                                     <li><span class="font-bold">Fecha de contrato: </span> {{$empleado->temporadas->last()->fecha}}</li>
                                 </ul>     
                             </div>
+                        </td>
+                        <td  class="py-3 px-6 text-left">
+                            <label class="switch_red">
+                                <input type="checkbox" {{ $empleado->estatus==1 ? 'checked':'' }}
+                                 wire:click="descanzar({{$empleado->id}},{{$empleado->estatus==1 ? 2: 1}})" 
+                                 wire:loading.attr="disabled">
+                                <span class="slider_red round"></span>
+                              </label>
                         </td>
                         <td class="py-3 px-6 text-left">
                             <div class="flex items-center">
@@ -96,8 +105,14 @@
                 <span class=" text-sm text-red-600">{{ $message }}</span>
             @enderror
             <label class="block mb-2 font-semibold" for="">Puesto: </label>
-            <input class="mb-3 w-full input_text" wire:model.defer="puesto" type="text" maxlength="20" placeholder="Velador">
-            @error('puesto')
+            <select class="mb-3 w-full input_text" wire:model.defer="puesto_id">
+                <option value="" selected disabled>Seleccione un puesto</option>
+                <option class="hidden" value="" selected>Seleccione un puesto</option>
+                @foreach ($puestos as $puesto)
+                    <option value="{{$puesto->id}}">{{$puesto->nombre}}</option>
+                @endforeach
+            </select>
+            @error('puesto_id')
                 <span class=" text-sm text-red-600">{{ $message }}</span>
             @enderror
             <label class="block mb-2 font-semibold" for="">Salario por dia: </label>

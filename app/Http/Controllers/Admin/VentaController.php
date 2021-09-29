@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Venta;
 use App\Models\Estanque;
 use App\Models\Cliente;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
 use App\Http\Requests\VentaRequest;
@@ -30,7 +29,7 @@ class VentaController extends Controller
     public function store(VentaRequest $request)
     {
         $venta = Venta::create($request->all());
-        return redirect()->route('admin.ventas.index')->with('info','Venta creada con exito'); 
+        return redirect()->route('admin.ventas.index')->with('info','Venta creada con exito');
     }
 
     public function edit(Venta $venta)
@@ -44,6 +43,6 @@ class VentaController extends Controller
     public function update(VentaRequest $request, Venta $venta)
     {
         $venta->update($request->all());
-        return redirect()->route('admin.ventas.index')->with('info','Venta actualizada con exito'); 
+        return redirect()->route('admin.ventas.index')->with('info','Venta actualizada con exito');
     }
 }

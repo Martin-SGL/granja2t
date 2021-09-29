@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Nomina extends Model
+class Puesto extends Model
 {
     use HasFactory;
+    protected $fillable = ['nombre','Lu','Ma','Mi','Ju','Vi','Sa','Do'];
 
-    protected $fillable = ['semana','total'];
-
-    //relación muchos a muchos
     public function empleados()
     {
-        return $this->belongsToMany(Empleado::class);
+        return $this->hasMany(Empleado::class);
     }
 }

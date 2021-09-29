@@ -20,11 +20,13 @@ class CreateEmpleadosTable extends Migration
             $table->string('calle',45);
             $table->integer('numero');
             $table->string('municipio_estado',45);
-            $table->string('puesto',20);
+            $table->unsignedBigInteger('puesto_id');
             $table->decimal('salario_dia',$precision = 8, $scale = 2);
-            $table->enum('estatus',[1,0])->default(1); #1 = activo, 0 = inactivo
+            $table->enum('estatus',[2,1,0])->default(2); #2=acitvo, 1 = descanzado, 0 = despedido
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('puesto_id')->references('id')->on('puestos')->onDelete('RESTRICT');
         });
     }
 
