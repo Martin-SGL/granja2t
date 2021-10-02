@@ -35,7 +35,7 @@
                     </td>
                     <td class="py-3 px-6 text-left">
                         <div class="flex flex-col items-center">
-                            {!! Form::number("salario[]", null, ['x-model'=>'salario','class'=>'input_text w-28 text-sm']) !!}
+                            {!! Form::number("salario[]", null, ['x-model'=>'salario','class'=>'input_text w-28 text-sm','step'=>'any']) !!}
 
                             @error("salario.$i")
                                 <p>
@@ -165,9 +165,9 @@
                                 dom:parseInt({!! json_encode($empleado->puesto->do) !!}),
                                 trabajo:true,
                                 dias:parseInt({!! json_encode($dias) !!}),
-                                salario:parseInt({!! json_encode($empleado->salario_dia) !!}),
+                                salario:parseFloat({!! json_encode($empleado->salario_dia) !!}),
                                 total: function(){
-                                    return (this.dias* this.salario);
+                                    return (this.dias* this.salario).toFixed(2);
                                 },
                                 SumRes(event){
                                     if(event.target.checked==true){

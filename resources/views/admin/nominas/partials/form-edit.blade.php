@@ -30,7 +30,7 @@
                     </td>
                     <td class="py-3 px-6 text-left">
                         <div class="flex flex-col items-center">
-                            {!! Form::number("salario[]", null, ['x-model'=>'salario','class'=>'input_text w-28 text-sm']) !!}
+                            {!! Form::number("salario[]", null, ['x-model'=>'salario','class'=>'input_text w-28 text-sm','step'=>'any']) !!}
 
                             @error("salario.$i")
                                 <p>
@@ -165,9 +165,9 @@
                                 dom:parseInt({!! json_encode($empleado->pivot->dom) !!}),
                                 trabajo:true,
                                 dias:parseInt({!! json_encode($empleado->pivot->cantidad_dias) !!}),
-                                salario:parseInt({!! json_encode($empleado->pivot->salario_dia) !!}),
+                                salario:parseFloat({!! json_encode($empleado->pivot->salario_dia) !!}),
                                 total: function(){
-                                    return (this.dias* this.salario);
+                                    return (this.dias* this.salario).toFixed(2);
                                 },
                                 SumRes(event){
                                     if(event.target.checked==true){
@@ -190,7 +190,7 @@
                                         this.vie=parseInt({!! json_encode($empleado->pivot->vie) !!});
                                         this.sab=parseInt({!! json_encode($empleado->pivot->sab) !!});
                                         this.dom=parseInt({!! json_encode($empleado->pivot->dom) !!});
-                                        this.dias=parseInt({!! json_encode($empleado->pivot->cantidad_dias) !!});
+                                        this.dias=parseFloat({!! json_encode($empleado->pivot->cantidad_dias) !!});
                                     }else{
                                         this.lun=0;this.mar=0;this.mie=0;
                                         this.jue=0;this.vie=0;this.sab=0;

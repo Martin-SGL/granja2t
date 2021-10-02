@@ -1,12 +1,12 @@
 <div x-data="{open_destroy: @entangle('open_destroy')}" @keyup.espace="alert('hola')">
     <div class="bg-white shadow-md rounded p-2 flex justify-between">
+        <div class="mt-2">
+            <span class="font-bold">Total de nominas:</span> $ {{$total_nominas}}
+        </div>
         <div>
             <label class="font-bold mr-2" for="">Semana para realizar pago: </label>
             <input wire:model="semana" type="week" class="input_text">
-        </div>
-        <div>
-            <a wire:click="crear('{{ $semana }}')"><button title="Registrar pago" class="btn_add"><i
-                        class="fas fa-plus-circle"></i></button></a>
+            <a wire:click="crear('{{ $semana }}')"><button title="Registrar pago" class="btn_add"><i class="fas fa-plus-circle"></i></button></a>
         </div>
     </div>
 

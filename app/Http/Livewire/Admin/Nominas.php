@@ -25,7 +25,8 @@ class Nominas extends Component
     public function render()
     {
         $nominas = Nomina::paginate($this->pag);
-        return view('livewire.admin.nominas',compact('nominas'));
+        $total_nominas = Nomina::sum('total');
+        return view('livewire.admin.nominas',compact('nominas','total_nominas'));
     }
 
     public function crear($semana)
