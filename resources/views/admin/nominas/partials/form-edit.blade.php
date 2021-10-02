@@ -15,12 +15,7 @@
             @php
                 $i = 0;
             @endphp
-            @foreach ($empleados as $empleado)
-            @php
-                $dias = $empleado->puesto->lu + $empleado->puesto->ma +$empleado->puesto->mi+
-                        $empleado->puesto->ju+$empleado->puesto->vi+$empleado->puesto->sa+
-                        $empleado->puesto->do;
-            @endphp
+            @foreach ($nomina->empleados as $empleado)
                 <tr x-data="main{{$i}}()" class="border-b border-gray-200 hover:bg-gray-100 capitalize">
                     <td class="py-3 px-6 text-left">
                         <div class="flex items-center">
@@ -156,16 +151,16 @@
                         function main{!! json_encode($i) !!}()
                         {
                             return {
-                                lun:parseInt({!! json_encode($empleado->puesto->lu) !!}),
-                                mar:parseInt({!! json_encode($empleado->puesto->ma) !!}),
-                                mie:parseInt({!! json_encode($empleado->puesto->mi) !!}),
-                                jue:parseInt({!! json_encode($empleado->puesto->ju) !!}),
-                                vie:parseInt({!! json_encode($empleado->puesto->vi) !!}),
-                                sab:parseInt({!! json_encode($empleado->puesto->sa) !!}),
-                                dom:parseInt({!! json_encode($empleado->puesto->do) !!}),
+                                lun:parseInt({!! json_encode($empleado->pivot->lun) !!}),
+                                mar:parseInt({!! json_encode($empleado->pivot->mar) !!}),
+                                mie:parseInt({!! json_encode($empleado->pivot->mie) !!}),
+                                jue:parseInt({!! json_encode($empleado->pivot->jue) !!}),
+                                vie:parseInt({!! json_encode($empleado->pivot->vie) !!}),
+                                sab:parseInt({!! json_encode($empleado->pivot->sab) !!}),
+                                dom:parseInt({!! json_encode($empleado->pivot->dom) !!}),
                                 trabajo:true,
-                                dias:parseInt({!! json_encode($dias) !!}),
-                                salario:parseInt({!! json_encode($empleado->salario_dia) !!}),
+                                dias:parseInt({!! json_encode($empleado->pivot->cantidad_dias) !!}),
+                                salario:parseInt({!! json_encode($empleado->pivot->salario_dia) !!}),
                                 total: function(){
                                     return (this.dias* this.salario);
                                 },
@@ -183,14 +178,14 @@
                                 },
                                 descanzar(event){
                                     if(event.target.checked==true){
-                                        this.lun=parseInt({!! json_encode($empleado->puesto->lu) !!});
-                                        this.mar=parseInt({!! json_encode($empleado->puesto->ma) !!});
-                                        this.mie=parseInt({!! json_encode($empleado->puesto->mi) !!});
-                                        this.jue=parseInt({!! json_encode($empleado->puesto->ju) !!});
-                                        this.vie=parseInt({!! json_encode($empleado->puesto->vi) !!});
-                                        this.sab=parseInt({!! json_encode($empleado->puesto->sa) !!});
-                                        this.dom=parseInt({!! json_encode($empleado->puesto->do) !!});
-                                        this.dias=parseInt({!! json_encode($dias) !!});
+                                        this.lun=parseInt({!! json_encode($empleado->pivot->lun) !!});
+                                        this.mar=parseInt({!! json_encode($empleado->pivot->mar) !!});
+                                        this.mie=parseInt({!! json_encode($empleado->pivot->mie) !!});
+                                        this.jue=parseInt({!! json_encode($empleado->pivot->jue) !!});
+                                        this.vie=parseInt({!! json_encode($empleado->pivot->vie) !!});
+                                        this.sab=parseInt({!! json_encode($empleado->pivot->sab) !!});
+                                        this.dom=parseInt({!! json_encode($empleado->pivot->dom) !!});
+                                        this.dias=parseInt({!! json_encode($empleado->pivot->cantidad_dias) !!});
                                     }else{
                                         this.lun=0;this.mar=0;this.mie=0;
                                         this.jue=0;this.vie=0;this.sab=0;
@@ -210,7 +205,5 @@
         </tbody>
     </table>
 </div>
-
-
 
 

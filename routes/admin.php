@@ -19,3 +19,5 @@ Route::resource('ventas',VentaController::class)->names('admin.ventas');
 Route::get('nominas', [NominaController::class,'index'])->name('admin.nominas.index');
 Route::get('nominas/create/{semana}', [NominaController::class,'create'])->name('admin.nominas.create');
 Route::post('nominas/store', [NominaController::class,'store'])->name('admin.nominas.store');
+Route::get('nominas/edit/{nomina}', [NominaController::class,'edit'])->name('admin.nominas.edit');
+Route::put('nominas/update/{nomina}', [NominaController::class,'update'])->name('admin.nominas.update');

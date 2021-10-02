@@ -30,29 +30,75 @@ class NominaController extends Controller
         $total = $res['total'];
         $cantidad_dias = $res['cantidad_dias'];
 
-        // $nomina = Nomina::create([
-        //     'semana' => $request->semana,
-        //     'total'=> $total_nomina,
-        // ]);
-        // for($i=0;$i<=count($request->id)-1; $i++)
-        // {
-        //     if($request->trabajo[$i]=='1'){
-        //         $nomina->empleados()->attach($request->id[$i],[
-        //             'cantidad_dias' => $cantidad_dias[$i],
-        //             'salario_dia' => $request->salario[$i],
-        //             'total' => $total[$i],
-        //             'lun' => $request->lunes[$i],
-        //             'mar' => $request->martes[$i],
-        //             'mie' => $request->miercoles[$i],
-        //             'jue' => $request->jueves[$i],
-        //             'vie' => $request->viernes[$i],
-        //             'sab' => $request->sabado[$i],
-        //             'dom' => $request->domingo[$i],
-        //             'recurso' => $request->recurso[$i]
-        //         ]);
-        //     }
-        // }
+        $nomina = Nomina::create([
+            'semana' => $request->semana,
+            'total'=> $total_nomina,
+        ]);
+        for($i=0;$i<=count($request->id)-1; $i++)
+        {
+            if($request->trabajo[$i]=='1'){
+                $nomina->empleados()->attach($request->id[$i],[
+                    'cantidad_dias' => $cantidad_dias[$i],
+                    'salario_dia' => $request->salario[$i],
+                    'total' => $total[$i],
+                    'lun' => $request->lunes[$i],
+                    'mar' => $request->martes[$i],
+                    'mie' => $request->miercoles[$i],
+                    'jue' => $request->jueves[$i],
+                    'vie' => $request->viernes[$i],
+                    'sab' => $request->sabado[$i],
+                    'dom' => $request->domingo[$i],
+                    'recurso' => $request->recurso[$i],
+                ]);
 
+
+            }
+        }
+
+        return redirect()->route('admin.nominas.index')->with('info','Nomina creada con exito');
+
+   }
+
+
+   public function edit(Nomina $nomina)
+   {
+       return view('admin.nominas.edit',compact('nomina'));
+   }
+
+   public function update(NominaRequest $request,Nomina $nomina)
+   {
+        $res =  $this->getOperaciones($request);
+        $total_nomina = $res['total_nomina'];
+        $total = $res['total'];
+        $cantidad_dias = $res['cantidad_dias'];
+
+        $nomina->update([
+            'semana' => $request->semana,
+            'total'=> $total_nomina,
+        ]);
+
+        for($i=0;$i<=count($request->id)-1; $i++)
+        {
+            $nomina->empleados()->updateExistingPivot($request->id[$i], [
+                'cantidad_dias' => $cantidad_dias[$i],
+                'salario_dia' => $request->salario[$i],
+                'total' => $total[$i],
+                'lun' => $request->lunes[$i],
+                'mar' => $request->martes[$i],
+                'mie' => $request->miercoles[$i],
+                'jue' => $request->jueves[$i],
+                'vie' => $request->viernes[$i],
+                'sab' => $request->sabado[$i],
+                'dom' => $request->domingo[$i],
+                'recurso' => $request->recurso[$i],
+            ]);
+
+            if($request->trabajo[$i]=='0'){
+                $nomina->empleados()->detach($request->id[$i]);
+            }
+        }
+
+        return redirect()->route('admin.nominas.index')->with('info','Nomina actualizada con exito');
    }
 
    protected function getOperaciones($request)

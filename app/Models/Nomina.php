@@ -14,6 +14,8 @@ class Nomina extends Model
     //relación muchos a muchos
     public function empleados()
     {
-        return $this->belongsToMany(Empleado::class);
+        return $this->belongsToMany(Empleado::class)
+            ->withPivot('cantidad_dias','salario_dia','lun','mar','mie','jue','vie','sab','dom','recurso')
+            ->withTimestamps();
     }
 }

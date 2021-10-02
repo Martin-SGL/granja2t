@@ -31,7 +31,7 @@ class CreateEmpleadoNominaTable extends Migration
             $table->timestamps();
 
             $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('RESTRICT');
-            $table->foreign('nomina_id')->references('id')->on('nominas')->onDelete('RESTRICT');
+            $table->foreign('nomina_id')->references('id')->on('nominas')->onDelete('CASCADE');
         });
     }
 
