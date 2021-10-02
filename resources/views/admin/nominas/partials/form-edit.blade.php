@@ -125,8 +125,13 @@
                     <td class="py-3 px-6 text-left">
                         <div class="flex items-center">
                             <select class="input_text w-28 text-sm" name="recurso[]">
-                                <option value="1">Granja 2T</option>
-                                <option value="2">VQ</option>
+                                @if ($empleado->pivot->recurso==1)
+                                    <option value="1" selected>Granja 2T</option>
+                                    <option value="2">VQ</option>
+                                @else
+                                    <option value="1">Granja 2T</option>
+                                    <option value="2" selected>VQ</option>
+                                @endif
                             </select>
                          </div>
                     </td>
