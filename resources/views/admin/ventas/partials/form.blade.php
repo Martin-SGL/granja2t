@@ -32,9 +32,9 @@
     <span class="text-sm text-red-600">{{ $message }}</span>
     @enderror
 </div>
-<div @if(isset($venta)) x-data="{kilos:{{$venta->kilos}}, precio:{{$venta->precio}}, total:{{$venta->total}}}"   
+<div @if(isset($venta)) x-data="{kilos:{{$venta->kilos}}, precio:{{$venta->precio}}, total:{{$venta->total}}}"
     @else   x-data="{kilos:{{ old('kilos') ? old('kilos') : 0 }},
-                     precio:{{ old('precio') ? old('precio') : 0 }}, total}"  
+                     precio:{{ old('precio') ? old('precio') : 0 }}, total}"
     @endif  class="mt-3 grid sm:grid-cols-4 gap-x-3">
     <div>
         {!! Form::label('piezas', 'Piezas: ', ['class'=>'font-bold']) !!}

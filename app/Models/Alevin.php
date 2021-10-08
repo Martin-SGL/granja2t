@@ -11,10 +11,10 @@ class Alevin extends Model
 
     protected $fillable = ['cantidad','precio_u','gasto_id'];
 
-    //relación uno a muchos inversa
-    public function gasto()
-    {
-        return $this->belongsTo(Gasto::class);
-        
-    }
+     //relación polimorfica uno a uno inversa
+     public function gasto()
+     {
+         return $this->morphOne(Gasto::class,'gastoable')->withTimestamps();;
+
+     }
 }

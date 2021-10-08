@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\EstanqueController;
 use App\Http\Controllers\Admin\MermaController;
 use App\Http\Controllers\Admin\EmpleadoController;
 use App\Http\Controllers\Admin\NominaController;
+use App\Http\Controllers\Admin\GastoController;
 
 
 Route::get('clientes', [ClienteController::class, 'index'])->name('admin.clientes.index');
@@ -21,3 +22,5 @@ Route::get('nominas/create/{semana}', [NominaController::class,'create'])->name(
 Route::post('nominas/store', [NominaController::class,'store'])->name('admin.nominas.store');
 Route::get('nominas/edit/{nomina}', [NominaController::class,'edit'])->name('admin.nominas.edit');
 Route::put('nominas/update/{nomina}', [NominaController::class,'update'])->name('admin.nominas.update');
+
+Route::get('gastos',[GastoController::class,'index'])->name('admin.gastos.index');

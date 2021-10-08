@@ -17,10 +17,7 @@ class CreateAlevinsTable extends Migration
             $table->id();
             $table->integer('cantidad');
             $table->decimal('precio_u', $precision = 8, $scale = 2);
-            $table->unsignedBigInteger('gasto_id');
             $table->timestamps();
-
-            $table->foreign('gasto_id')->references('id')->on('gastos')->onDelete('RESTRICT');
         });
     }
 

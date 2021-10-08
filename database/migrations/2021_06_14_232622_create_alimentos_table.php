@@ -18,10 +18,8 @@ class CreateAlimentosTable extends Migration
             $table->string('tipo',20);
             $table->decimal('precio_u',$precision = 8, $scale = 2);
             $table->integer('cantidad');
-            $table->unsignedBigInteger('gasto_id');
             $table->timestamps();
 
-            $table->foreign('gasto_id')->references('id')->on('gastos')->onDelete('RESTRICT');
         });
     }
 

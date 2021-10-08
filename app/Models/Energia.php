@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Energia extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = ['blower','poso','domestica','gasto_id'];
 
-    //relación uno a muchos inversa
+    //relación polimorfica uno a uno inversa
     public function gasto()
     {
-        return $this->belongsTo(Gasto::class);
-        
+        return $this->morphOne(Gasto::class,'gastoable')->withTimestamps();;
+
     }
 }

@@ -16,10 +16,7 @@ class CreateVariosTable extends Migration
         Schema::create('varios', function (Blueprint $table) {
             $table->id();
             $table->string('descripcion',100);
-            $table->unsignedBigInteger('gasto_id');
             $table->timestamps();
-
-            $table->foreign('gasto_id')->references('id')->on('gastos')->onDelete('RESTRICT');
         });
     }
 

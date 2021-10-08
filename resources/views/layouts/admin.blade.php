@@ -22,10 +22,10 @@
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
-    <!-- No mostrar elementos componentes alpine cuanod se recarga la página -->
+    <!-- No mostrar elementos componentes alpine cuando se recarga la página -->
     <style>[x-cloak] { display: none;}</style>
 
-    
+
 
 </head>
 
@@ -33,13 +33,13 @@
     <div class="flex h-screen bg-gray-50" :class="{ 'overflow-hidden': isSideMenuOpen }">
         <!-- menu escritorio y movil -->
         @include('layouts.admin.menu')
-       
-    
+
+
         <div class="flex flex-col w-full overflow-x-hidden">
             <!-- parte superior -->
             @include('layouts.admin.header')
 
-            
+
             <!-- cuerpo/main -->
             <main class="h-full overflow-y-auto mt-4 p-4">
                 @yield('content')
@@ -51,18 +51,18 @@
     <!-- alertifyjs -->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     {{--funcion de data para el layout admin --}}
-    
+
     @if(session('info'))
         <script>
             let mensaje_sesion = "{{session('info')}}";
         </script>
-        {{ Session::forget('info') }}     
+        {{ Session::forget('info') }}
     @else
         <script>
             let mensaje_sesion = "";
         </script>
     @endif
-    
+
     <script>
         if(mensaje_sesion!=""){alertify.success(mensaje_sesion);}
         Livewire.on('confirm', mensaje => {

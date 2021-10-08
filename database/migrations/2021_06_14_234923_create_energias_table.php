@@ -18,10 +18,7 @@ class CreateEnergiasTable extends Migration
             $table->decimal('blower',$precision = 8, $scale = 2);
             $table->decimal('poso',$precision = 8, $scale = 2);
             $table->decimal('domestica',$precision = 8, $scale = 2);
-            $table->unsignedBigInteger('gasto_id');
             $table->timestamps();
-
-            $table->foreign('gasto_id')->references('id')->on('gastos')->onDelete('RESTRICT');
         });
     }
 

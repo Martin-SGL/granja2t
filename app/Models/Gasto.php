@@ -8,29 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Gasto extends Model
 {
     use HasFactory;
-    protected $fillable = ['fecha','total','recurso'];
+    protected $fillable = ['fecha','total','recurso','gastoable_id','gastoable_type'];
 
-    //relacion uno a muchos
-    public function alimentos()
+    //relacion polimorfica uno a uno
+    public function gastoable()
     {
-        return $this->hasMany(Alimento::class);
+        return $this->morphTo();
     }
 
-    //relacion uno a muchos
-    public function alevins()
-    {
-        return $this->hasMany(Alevin::class);
-    }
-
-    //relacion uno a muchos
-    public function energias()
-    {
-        return $this->hasMany(Energia::class);
-    }
-
-    //relacion uno a muchos
-    public function varios()
-    {
-        return $this->hasMany(Vario::class);
-    }
 }

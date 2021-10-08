@@ -14,11 +14,14 @@ class CreateGastosTable extends Migration
     public function up()
     {
         Schema::create('gastos', function (Blueprint $table) {
-            $table->id();
             $table->date('fecha');
             $table->decimal('total', $precision = 8, $scale = 2);
-            $table->enum('recurso', [1,2]); //1= VQ || 2=Granja
+            $table->enum('recurso', [1,2]); //1= Granja 2T || 2=VQ
+            $table->unsignedBigInteger('gastoable_id');
+            $table->string('gastoable_type');
             $table->timestamps();
+
+            $table->primary(['gastoable_id','gastoable_type']);
         });
     }
 

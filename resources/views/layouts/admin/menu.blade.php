@@ -1,24 +1,27 @@
 <?php
 $menu = collect([
-    ['titulo' => 'Resumen', 'icono' => 'fas fa-chart-line','route' => 'admin.index','r_create' => '','r_edit' => ''], 
-    ['titulo' => 'Ventas', 'icono' => 'fab fa-stripe-s','route' =>'admin.ventas.index','r_create' => 'admin.ventas.create','r_edit' => 'admin.ventas.edit'],
-    ['titulo' => 'Clientes', 'icono' => 'fas fa-user-tie','route' => 'admin.clientes.index','r_create' => '','r_edit' => 't'],
-    ['titulo' => 'Estanques', 'icono' => 'fas fa-fish','route' => 'admin.estanques.index','r_create' => '','r_edit' => ''],
-    ['titulo' => 'Mermas', 'icono' => 'fas fa-skull','route' => 'admin.mermas.index', 'r_create' => '','r_edit' => ''],
-    ['titulo' => 'Empleados', 'icono' => 'fas fa-user-astronaut','route' => 'admin.empleados.index', 'r_create' => '','r_edit' => ''],
-    ['titulo' => 'Nomina', 'icono' => 'fas fa-money-check-alt','route' => 'admin.nominas.index', 'r_create' => '','r_edit' => '']
-]); 
+    ['titulo' => 'Resumen', 'icono' => 'fas fa-chart-line','route' => 'admin.index','name_r'=>''],
+    ['titulo' => 'Ventas', 'icono' => 'fab fa-stripe-s','route' =>'admin.ventas.index','name_r'=>'ventas'],
+    ['titulo' => 'Nomina', 'icono' => 'fas fa-money-check-alt','route' => 'admin.nominas.index','name_r'=>'nominas'],
+    ['titulo' => 'Gastos', 'icono' => 'fas fa-funnel-dollar','route' => 'admin.gastos.index','name_r'=>'gastos'],
+    ['titulo' => 'Mermas', 'icono' => 'fas fa-skull','route' => 'admin.mermas.index','name_r'=>'mermas'],
+    ['titulo' => 'Clientes', 'icono' => 'fas fa-user-tie','route' => 'admin.clientes.index','name_r'=>'clientes'],
+    ['titulo' => 'Empleados', 'icono' => 'fas fa-user-astronaut','route' => 'admin.empleados.index','name_r'=>'empleados'],
+    ['titulo' => 'Estanques', 'icono' => 'fas fa-fish','route' => 'admin.estanques.index','name_r'=>'estanques']
+]);
 ?>
 <!-- Desktop sidebar -->
-<aside x-data="{active:'{{ Route::currentRouteName()}}'}" class="z-20 hidden w-64 flex-shrink-0 text-center overflow-y-auto bg-gray-600 lg:block">
+
+<aside x-data="{active:'{{Request::segment(2)}}'}" class="z-20 hidden w-64 flex-shrink-0 text-center overflow-y-auto bg-gray-600 lg:block">
     <div class="py-4 block text-white">
         <a class="block text-lg font-bold transition-all duration-500 transform hover:-translate-y-1" href="{{route('home')}}" title="Ir a inicio">
           <i class=" mr-1 fas fa-home"></i>
             Granja Doble T
+
         </a>
         <ul class="mt-6">
             @foreach ($menu as $m)
-                <li :class="{'bg-gray-300 text-black': active == '{{$m['route']}}'}" class="relative hover:bg-gray-100">
+                <li :class="{'bg-gray-300 text-black': active=='{{$m['name_r']}}'}" class="relative hover:bg-gray-100">
                     <a class="py-3 px-3 inline-flex items-center w-full text-sm font-semibold transition-all duration-500 transform hover:translate-x-3 hover:text-black" href="{{route($m['route'])}}">
                         <i class="{{ $m['icono'] }}"></i>
                         <span class="ml-4">{{ $m['titulo'] }}</span>
@@ -35,15 +38,15 @@ $menu = collect([
     x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0 transform -translate-x-20" @click.away="closeSideMenu"
     @keydown.escape="closeSideMenu">
-    <div x-data="{active:'{{Route::currentRouteName()}}'}" class="py-4 text-center">
+    <div x-data="{active:'{{Request::segment(2)}}'}" class="py-4 text-center">
         <a class="block text-lg font-bold duration-500 transform hover:-translate-y-1" href="{{route('home')}}">
           <i class=" mr-1 fas fa-home"></i>
-            Granja doble T 
+            Granja doble T
         </a>
         <ul class="mt-6">
           <li class="relative">
             @foreach ($menu as $m)
-            <li  class="relative hover:bg-gray-100" :class="{'bg-gray-300 text-black': active == '{{$m['route']}}'}">
+            <li  class="relative hover:bg-gray-100" :class="{'bg-gray-300 text-black': active == '{{$m['name_r']}}'}">
                 <a class="hover:text-black px-6 py-2 inline-flex items-center w-full text-sm font-semibold transition-all duration-500 transform hover:translate-x-3" href="{{route($m['route'])}}">
                     <i class="{{ $m['icono'] }}"></i>
                     <span class="ml-4">{{ $m['titulo'] }}</span>
@@ -54,9 +57,9 @@ $menu = collect([
             <img class="mx-auto object-cover w-10 h-10 rounded-full mb-2"
                 src="{{ Auth::user()->profile_photo_url }}"
                 alt="" aria-hidden="true" />
-                
-            <li class="relative hover:bg-gray-100" :class="{'bg-gray-300 text-black': active == 'profile.show'}">
-                <a class="hover:text-black px-6 py-2 inline-flex items-center w-full text-sm font-semibold transition-all duration-500 transform hover:translate-x-3" 
+
+            <li class="relative hover:bg-gray-100" :class="{'bg-gray-300 text-black': active == 'profile'}">
+                <a class="hover:text-black px-6 py-2 inline-flex items-center w-full text-sm font-semibold transition-all duration-500 transform hover:translate-x-3"
                 href="{{ route('profile.show') }}">
                     <i class="mr-2 fas fa-user-cog"></i>
                     <span>Perfil</span>
@@ -65,7 +68,7 @@ $menu = collect([
             <li class="relative hover:bg-gray-100">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <a class="hover:text-black px-6 py-2 inline-flex items-center w-full text-sm font-semibold transition-all duration-500 transform hover:translate-x-3" 
+                    <a class="hover:text-black px-6 py-2 inline-flex items-center w-full text-sm font-semibold transition-all duration-500 transform hover:translate-x-3"
                     href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                     this.closest('form').submit();">
@@ -73,7 +76,7 @@ $menu = collect([
                         <span>Cerrar Sesión</span>
                     </a>
                 </form>
-            </li>                              
+            </li>
         </ul>
     </div>
 </aside>
