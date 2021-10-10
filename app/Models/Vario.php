@@ -9,12 +9,12 @@ class Vario extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['descripcion','gasto_id'];
+    protected $fillable = ['descripcion'];
 
      //relación polimorfica uno a uno inversa
      public function gasto()
      {
-         return $this->morphOne(Gasto::class,'gastoable')->withTimestamps();;
+         return $this->morphOne(Gasto::class,'gastoable');
 
      }
 }

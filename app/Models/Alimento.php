@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Alimento extends Model
 {
     use HasFactory;
-    protected $fillable = ['tipo','precio_u','cantidad','gasto_id'];
+    protected $fillable = ['tipo','precio_u','cantidad'];
 
      //relación polimorfica uno a uno inversa
      public function gasto()

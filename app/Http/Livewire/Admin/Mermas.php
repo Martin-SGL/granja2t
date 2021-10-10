@@ -10,12 +10,12 @@ class Mermas extends Component
 {
     use WithPagination;
     public $open=false, $open_destroy=false, $pag=10;
-    public $merma_id, $fecha, $cantidad, $estanque_merma, $action= 'Agregar', $merma_inicial; 
+    public $merma_id, $fecha, $cantidad, $estanque_merma, $action= 'Agregar', $merma_inicial;
     public $year, $month_search, $estanque_search;
     public $mode=1; #1 = resumen #2 = detalle
 
     protected $rules = [
-        'cantidad' => 'required|max:8|not_in:0',
+        'cantidad' => 'required|max:10|not_in:0',
         'fecha' => 'required',
         'estanque_merma' => 'required'
     ];
@@ -27,7 +27,7 @@ class Mermas extends Component
         'fecha.required' => 'El campo fecha es requerido',
         'estanque_merma.required' => 'El campo estanque es requerido'
     ];
-    
+
     public function mount(){
         $this->merma_inicial = new Merma();
         $this->fecha = date('Y-m-d');
@@ -68,7 +68,7 @@ class Mermas extends Component
         $this->estanque_merma = $merma->estanque_id;
         $this->action = 'Editar';
         $this->open = true;
-        
+
     }
 
     public function update()
@@ -80,18 +80,18 @@ class Mermas extends Component
             'cantidad' => $this->cantidad,
             'estanque_id' =>  $this->estanque_merma
         ]);
-        
+
         $this->fecha = date('Y-m-d');
         $this->reset(['cantidad','estanque_merma','open']);
         $this->emit('confirm','Merma actualizada con exito');
-       
+
     }
 
     public function destroy(Merma $merma)
     {
         $this->open_destroy = true;
         $this->merma_inicial = $merma;
-          
+
     }
 
     public function destroy_confirmation()
@@ -100,7 +100,7 @@ class Mermas extends Component
         $this->merma_inicial = new Merma();
         $this->reset('open_destroy');
         $this->emit('confirm','Merma eliminada con exito');
-        
+
     }
 
     public function init($open=false)

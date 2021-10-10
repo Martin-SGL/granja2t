@@ -9,12 +9,12 @@ class Alevin extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['cantidad','precio_u','gasto_id'];
+    protected $fillable = ['cantidad','precio_u'];
 
      //relación polimorfica uno a uno inversa
      public function gasto()
      {
-         return $this->morphOne(Gasto::class,'gastoable')->withTimestamps();;
+         return $this->morphOne(Gasto::class,'gastoable');
 
      }
 }

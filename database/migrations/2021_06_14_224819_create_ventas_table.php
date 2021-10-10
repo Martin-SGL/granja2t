@@ -19,16 +19,16 @@ class CreateVentasTable extends Migration
             $table->integer('piezas');
             $table->date('fecha');
             $table->decimal('precio',$precision = 8, $scale = 2);
-            $table->decimal('total',$precision = 8, $scale = 2);
+            $table->decimal('total',$precision = 12, $scale = 2);
             $table->unsignedBigInteger('cliente_id');
             $table->unsignedBigInteger('estanque_id');
             $table->timestamps();
 
             $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('RESTRICT');
             $table->foreign('estanque_id')->references('id')->on('estanques')->onDelete('RESTRICT');
-           
 
-            
+
+
         });
     }
 

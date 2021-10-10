@@ -15,7 +15,7 @@ class CreateMermasTable extends Migration
     {
         Schema::create('mermas', function (Blueprint $table) {
             $table->id();
-            $table->integer('cantidad');
+            $table->bigInteger('cantidad');
             $table->date('fecha');
             $table->unsignedBigInteger('estanque_id');
             $table->timestamps();

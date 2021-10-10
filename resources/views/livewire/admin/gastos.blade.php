@@ -1,15 +1,15 @@
-<div>
+<div x-data="{open_destroy: @entangle('open_destroy')}">
     <div class="flex items-center justify-end">
         <div class="mr-5">
             Seleccione el tipo de gasto:
         </div>
-        <select wire:model="tipo_guardar" class="input_text w-52" wire:model="tipo_modal">
+        <select class="input_text w-52" wire:model="tipo_modal">
             <option value="1">Alimento</option>
             <option value="2">Energia</option>
             <option value="3">Alevines</option>
             <option value="4">Varios</option>
         </select>
-        <button class="btn_add" title="Agregar gasto" wire:click="modales()">
+        <button class="btn_add" title="Agregar gasto" wire:click="modales()" @click="$dispatch('reset')">
             <i class="fas fa-plus-circle"></i>
         </button>
     </div>
@@ -47,6 +47,12 @@
                             @php
                                 if($gasto->gastoable_type=='App\Models\Alimento'){
                                     echo 'Alimento';
+                                }else if($gasto->gastoable_type=='App\Models\Energia'){
+                                    echo 'Energia';
+                                }else if($gasto->gastoable_type=='App\Models\Alevin'){
+                                    echo 'Alevines';
+                                }else{
+                                    echo 'Varios';
                                 }
                             @endphp
                         </div>
@@ -66,16 +72,27 @@
                             <ul class="flex-column">
                                 @if ($gasto->gastoable_type=='App\Models\Alimento')
                                     <li><span class="font-bold">Tipo:</span> {{$gasto->gastoable->tipo}} </li>
-                                    <li><span class="font-bold">Precio: </span> ${{$gasto->gastoable->precio_u}} </li>
-                                    <li><span class="font-bold">Cantidad:</span> {{$gasto->gastoable->cantidad}} </li>
+                                    <li><span class="font-bold">Cantidad: </span> {{$gasto->gastoable->cantidad}} </li>
+                                    <li><span class="font-bold">Precio:</span> $ {{$gasto->gastoable->precio_u}} </li>
+                                @elseif ($gasto->gastoable_type=='App\Models\Energia')
+                                    <li><span class="font-bold">Blower:</span> $ {{$gasto->gastoable->blower}} </li>
+                                    <li><span class="font-bold">Pozo: </span> $ {{$gasto->gastoable->pozo}} </li>
+                                    <li><span class="font-bold">Dómestica:</span> $ {{$gasto->gastoable->domestica}} </li>
+                                @elseif ($gasto->gastoable_type=='App\Models\Alevin')
+                                    <li><span class="font-bold">Cantidad: </span> {{$gasto->gastoable->cantidad}} </li>
+                                    <li><span class="font-bold">Precio </span> ${{$gasto->gastoable->precio_u}} </li>
+                                @elseif ($gasto->gastoable_type=='App\Models\Vario')
+                                    <li><span class="font-bold">Descripcion:</span> </li>
+                                    <li class="w-40"> {{$gasto->gastoable->descripcion}} </li>
+
                                 @endif
                             </ul>
                         </div>
                     </td>
                     <td class="py-3 px-6 text-left">
                         <div class="flex items-center">
-                            <button wire:click="edit({{ $gasto }})" title="Editar gasto"
-                                class="btn_edit"><i class="fas fa-edit"></i></button>
+                            {{-- <button wire:click="edit({{ $gasto }})" title="Editar gasto"
+                                class="btn_edit"><i class="fas fa-edit"></i></button> --}}
                             <button wire:click="destroy({{ $gasto }})" title="Eliminar gasto"
                                 class="btn_delete"><i class="fas fa-trash-alt"></i></button>
                         </div>
@@ -87,73 +104,58 @@
         </table>
     </div>
 
-    {{-- Modales agregar Alimento--}}
-    <x-jet-dialog-modal wire:model="open_alimento" >
-        <x-slot name="title">
-            <div class="border-b-2">
-                {{ $action_alimento }}  Gasto (<span class="font-bold">Alimento<span>)
-            </div>
-        </x-slot>
-        <x-slot name="content">
-            <div class="grid grid-cols-2" x-data="{cantidad:null,precio:null}">
-                <div class="ml-2">
-                    <label class="block mb-2 font-semibold" for="">Fecha: </label>
-                    <input class="mb-3 input_text w-full" wire:model.defer="fecha" type="date">
-                    @error('fecha')
-                        <span class="input_text text-sm text-red-600">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="ml-2">
-                    <label class="block mb-2 font-semibold" for="">Tipo: </label>
-                    <select class="mb-3 w-full input_text" wire:model.defer="tipo_alimento">
-                        <option value="Grano">Grano</option>
-                        <option value="Harina">Harina</option>
-                    </select>
-                    @error('tipo_alimento')
-                        <span class=" text-sm text-red-600">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="ml-2">
-                    <label class="block mb-2 font-semibold" for="">Cantidad: </label>
-                    <input class="mb-3 w-full input_text" wire:model.defer="cantidad_alimento" type="number"
-                        placeholder="10" x-model="cantidad">
-                    @error('cantidad_alimento')
-                        <span class=" text-sm text-red-600">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="ml-2">
-                    <label class="block mb-2 font-semibold" for="">Precio unitario: </label>
-                    <input class="mb-3 w-full input_text" wire:model.defer="precio_alimento" type="number"
-                        placeholder="200.5" step="any" x-model="precio">
-                    @error('precio_alimento')
-                        <span class=" text-sm text-red-600">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="ml-2">
-                    <label class="block mb-2 font-semibold" for="">Total: </label>
-                    <input class="mb-3 w-full input_text" type="number"
-                     disabled x-model="cantidad*precio">
-                    @error('total')
-                        <span class=" text-sm text-red-600">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="ml-2">
-                    <label class="block mb-2 font-semibold" for="">Recurso: </label>
-                    <select class="mb-3 w-full input_text" wire:model.defer="recurso">
-                        <option value="1">Granja 2T</option>
-                        <option value="2">VQ</option>
-                    </select>
-                    @error('recurso')
-                        <span class=" text-sm text-red-600">{{ $message }}</span>
-                    @enderror
+    @include('admin.gastos.modales.alimento')
+    @include('admin.gastos.modales.energia')
+    @include('admin.gastos.modales.alevin')
+    @include('admin.gastos.modales.varios')
+
+    {{-- -Modal Eliminar --}}
+    <div x-cloak x-show="open_destroy" x-transition:enter="ease-out duration-300"
+    x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+    x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+    x-transition:leave="ease-in duration-200"
+    x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+    x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+    class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+    aria-modal="true">
+    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+        <!-- This element is to trick the browser into centering the modal contents. -->
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+        <div
+            class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div @click.away="open_destroy=false" class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                    <div
+                        class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                        <!-- Heroicon name: outline/exclamation -->
+                        <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                    </div>
+                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                            ¿Esta seguro de eliminar el gasto con fecha  <span
+                                class="font-bold">{{ $gasto_inicial->fecha }}</span> ?
+                        </h3>
+                    </div>
                 </div>
             </div>
-        </x-slot>
-        <x-slot name="footer">
-            <button @if ($action_alimento == 'Agregar') class="btn_add" wire:click="store_alimento()"  @else class="btn_edit" wire:click="update()" @endif>Guardar</button>
-            <button class="btn_close" wire:click="$set('open_alimento',close)">Cerrar</button>
-        </x-slot>
-    </x-jet-dialog-modal>
+            <div class=" bg-gray-100 px-4 py-3 sm:px-6 flex flex-row-reverse">
+                <button @click="open_destroy=false" type="button" class="btn_close">
+                    Cancelar
+                </button>
+                <button wire:click="destroy_confirmation()" type="button" class="btn_delete">
+                    Continuar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 </div>

@@ -16,7 +16,7 @@ class CreateEnergiasTable extends Migration
         Schema::create('energias', function (Blueprint $table) {
             $table->id();
             $table->decimal('blower',$precision = 8, $scale = 2);
-            $table->decimal('poso',$precision = 8, $scale = 2);
+            $table->decimal('pozo',$precision = 8, $scale = 2);
             $table->decimal('domestica',$precision = 8, $scale = 2);
             $table->timestamps();
         });

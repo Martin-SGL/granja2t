@@ -15,7 +15,7 @@ class CreateAlevinsTable extends Migration
     {
         Schema::create('alevins', function (Blueprint $table) {
             $table->id();
-            $table->integer('cantidad');
+            $table->bigInteger('cantidad');
             $table->decimal('precio_u', $precision = 8, $scale = 2);
             $table->timestamps();
         });
