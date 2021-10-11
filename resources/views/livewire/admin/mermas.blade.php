@@ -13,7 +13,7 @@
                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
-          
+
                 <div class="bg-white shadow-md rounded my-6 overflow-y-auto">
                     <table class="mx-auto min-w-max w-full table-auto">
                         <thead>
@@ -46,14 +46,14 @@
                                     @if ($i==1)
                                        <td rowspan="{{$estanques->count()}}" class="text-4xl py-3 border-1 border-l-2 border-r-2 text-center hover:bg-gray-400 hover:text-white">
                                             {{$total}}
-                                        </td> 
+                                        </td>
                                     @endif
                                 </tr>
                                 @php $i++; @endphp
                             @endforeach
                         </tbody>
                     </table>
-                </div>    
+                </div>
         </div>
         {{--Area de detalle--}}
         <div x-show="!active"
@@ -65,15 +65,15 @@
             <div class="mt-2 flex w-full">
                 <select wire:model="month_search" class="input_text w-full">
                     <option value="">Todos los meses</option>
-                    <option value="1">Enero</option>
-                    <option value="2">Febrero</option>
-                    <option value="3">Marzo</option>
-                    <option value="4">Abril</option>
-                    <option value="5">Mayo</option>
-                    <option value="6">Junio</option>
-                    <option value="7">Julio</option>
-                    <option value="8">Agosto</option>
-                    <option value="9">Septiembre</option>
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
                     <option value="10">Octubre</option>
                     <option value="11">Noviembre</option>
                     <option value="12">Diciembre</option>

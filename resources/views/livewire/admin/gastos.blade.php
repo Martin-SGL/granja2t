@@ -1,6 +1,9 @@
 <div x-data="{open_destroy: @entangle('open_destroy')}">
     <div class="flex items-center justify-end">
-        <div class="mr-5">
+        <div class="justify-start w-full">
+            Total de gastos = <span class="font-bold">$ {{$total_gasto}} </span>
+        </div>
+        <div class="mr-5 w-72">
             Seleccione el tipo de gasto:
         </div>
         <select class="input_text w-52" wire:model="tipo_modal">
@@ -14,94 +17,130 @@
         </button>
     </div>
 
+    <div class="mt-2 flex w-full">
+        <select wire:model="month_search" class="input_text w-full">
+            <option value="">Todos los meses</option>
+            <option value="1">Enero</option>
+            <option value="2">Febrero</option>
+            <option value="3">Marzo</option>
+            <option value="4">Abril</option>
+            <option value="5">Mayo</option>
+            <option value="6">Junio</option>
+            <option value="7">Julio</option>
+            <option value="8">Agosto</option>
+            <option value="9">Septiembre</option>
+            <option value="10">Octubre</option>
+            <option value="11">Noviembre</option>
+            <option value="12">Diciembre</option>
+        </select>
+
+        <select wire:model="gasto_search" class="input_text w-full ml-2">
+            <option value="">Todos los gastos</option>
+            <option value="App\Models\Alimento">Alimento</option>
+            <option value="App\Models\Energia">Energia</option>
+            <option value="App\Models\Alevin">Alevines</option>
+            <option value="App\Models\Alimento">Varios</option>
+        </select>
+    </div>
 
     <div class="bg-white shadow-md rounded my-6 overflow-y-auto">
-        <table class="mx-auto min-w-max w-full table-auto">
-            <thead>
-                <tr class="bg-gray-200 text-gray-600 uppercase text-sm">
-                    <th class="py-3 px-6 text-left">#</th>
-                    <th class="py-3 px-6 text-left">Fecha</th>
-                    <th class="py-3 px-6 text-left">Tipo de gasto</th>
-                    <th class="py-3 px-6 text-left">Total</th>
-                    <th class="py-3 px-6 text-left">Recurso</th>
-                    <th class="py-3 px-6 text-left">I-Extra</th>
-                    <th class="py-3 px-6 text-left">Acciones</th>
-                </tr>
-            </thead>
-            <tbody class="text-gray-600 text-sm font-light">
-                @php  $i=1; @endphp
-                @foreach ($gastos as $gasto)
-                <tr class="border-b border-gray-200 hover:bg-gray-100 capitalize sm:table-row hidden">
-                    <td class="py-3 px-6 text-left">
-                        <div class="flex items-center">
-                            {{ $i }}
-                        </div>
-                    </td>
-                    <td class="py-3 px-6 text-left">
-                        <div class="flex items-center">
-                            {{ $gasto->fecha }}
-                        </div>
-                    </td>
-                    <td class="py-3 px-6 text-left">
-                        <div class="flex items-center">
-                            @php
-                                if($gasto->gastoable_type=='App\Models\Alimento'){
-                                    echo 'Alimento';
-                                }else if($gasto->gastoable_type=='App\Models\Energia'){
-                                    echo 'Energia';
-                                }else if($gasto->gastoable_type=='App\Models\Alevin'){
-                                    echo 'Alevines';
-                                }else{
-                                    echo 'Varios';
-                                }
-                            @endphp
-                        </div>
-                    </td>
-                    <td class="py-3 px-6 text-left">
-                        <div class="flex items-center">
-                            $ {{ $gasto->total }}
-                        </div>
-                    </td>
-                    <td class="py-3 px-6 text-left">
-                        <div class="flex items-center">
-                            {{ ($gasto->recurso==1? 'Granja 2T': 'VQ') }}
-                        </div>
-                    </td>
-                    <td class="py-3 px-6 text-left">
-                        <div class="flex items-center">
-                            <ul class="flex-column">
-                                @if ($gasto->gastoable_type=='App\Models\Alimento')
-                                    <li><span class="font-bold">Tipo:</span> {{$gasto->gastoable->tipo}} </li>
-                                    <li><span class="font-bold">Cantidad: </span> {{$gasto->gastoable->cantidad}} </li>
-                                    <li><span class="font-bold">Precio:</span> $ {{$gasto->gastoable->precio_u}} </li>
-                                @elseif ($gasto->gastoable_type=='App\Models\Energia')
-                                    <li><span class="font-bold">Blower:</span> $ {{$gasto->gastoable->blower}} </li>
-                                    <li><span class="font-bold">Pozo: </span> $ {{$gasto->gastoable->pozo}} </li>
-                                    <li><span class="font-bold">Dómestica:</span> $ {{$gasto->gastoable->domestica}} </li>
-                                @elseif ($gasto->gastoable_type=='App\Models\Alevin')
-                                    <li><span class="font-bold">Cantidad: </span> {{$gasto->gastoable->cantidad}} </li>
-                                    <li><span class="font-bold">Precio </span> ${{$gasto->gastoable->precio_u}} </li>
-                                @elseif ($gasto->gastoable_type=='App\Models\Vario')
-                                    <li><span class="font-bold">Descripcion:</span> </li>
-                                    <li class="w-40"> {{$gasto->gastoable->descripcion}} </li>
+        @if ($gastos->count())
+            <table class="mx-auto min-w-max w-full table-auto">
+                <thead>
+                    <tr class="bg-gray-200 text-gray-600 uppercase text-sm">
+                        <th class="py-3 px-6 text-left">#</th>
+                        <th class="py-3 px-6 text-left">Fecha</th>
+                        <th class="py-3 px-6 text-left">Tipo de gasto</th>
+                        <th class="py-3 px-6 text-left">Total</th>
+                        <th class="py-3 px-6 text-left">Recurso</th>
+                        <th class="py-3 px-6 text-left">I-Extra</th>
+                        <th class="py-3 px-6 text-left">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-600 text-sm font-light">
+                    @php  $i = 1 + $page * $pag - $pag; @endphp
+                    @foreach ($gastos as $gasto)
+                    <tr class="border-b border-gray-200 hover:bg-gray-100 capitalize">
+                        <td class="py-3 px-6 text-left">
+                            <div class="flex items-center">
+                                {{ $i }}
+                            </div>
+                        </td>
+                        <td class="py-3 px-6 text-left">
+                            <div class="flex items-center">
+                                {{ $gasto->fecha }}
+                            </div>
+                        </td>
+                        <td class="py-3 px-6 text-left">
+                            <div class="flex items-center">
+                                @php
+                                    if($gasto->gastoable_type=='App\Models\Alimento'){
+                                        echo 'Alimento';
+                                    }else if($gasto->gastoable_type=='App\Models\Energia'){
+                                        echo 'Energia';
+                                    }else if($gasto->gastoable_type=='App\Models\Alevin'){
+                                        echo 'Alevines';
+                                    }else{
+                                        echo 'Varios';
+                                    }
+                                @endphp
+                            </div>
+                        </td>
+                        <td class="py-3 px-6 text-left">
+                            <div class="flex items-center">
+                                $ {{ $gasto->total }}
+                            </div>
+                        </td>
+                        <td class="py-3 px-6 text-left">
+                            <div class="flex items-center">
+                                {{ ($gasto->recurso==1? 'Granja 2T': 'VQ') }}
+                            </div>
+                        </td>
+                        <td class="py-3 px-6 text-left">
+                            <div class="flex items-center">
+                                <ul class="flex-column">
+                                    @if ($gasto->gastoable_type=='App\Models\Alimento')
+                                        <li><span class="font-bold">Tipo:</span> {{$gasto->gastoable->tipo}} </li>
+                                        <li><span class="font-bold">Cantidad: </span> {{$gasto->gastoable->cantidad}} </li>
+                                        <li><span class="font-bold">Precio:</span> $ {{$gasto->gastoable->precio_u}} </li>
+                                    @elseif ($gasto->gastoable_type=='App\Models\Energia')
+                                        <li><span class="font-bold">Blower:</span> $ {{$gasto->gastoable->blower}} </li>
+                                        <li><span class="font-bold">Pozo: </span> $ {{$gasto->gastoable->pozo}} </li>
+                                        <li><span class="font-bold">Dómestica:</span> $ {{$gasto->gastoable->domestica}} </li>
+                                    @elseif ($gasto->gastoable_type=='App\Models\Alevin')
+                                        <li><span class="font-bold">Cantidad: </span> {{$gasto->gastoable->cantidad}} </li>
+                                        <li><span class="font-bold">Precio </span> ${{$gasto->gastoable->precio_u}} </li>
+                                    @elseif ($gasto->gastoable_type=='App\Models\Vario')
+                                        <li><span class="font-bold">Descripcion:</span> </li>
+                                        <li class="w-40"> {{$gasto->gastoable->descripcion}} </li>
 
-                                @endif
-                            </ul>
-                        </div>
-                    </td>
-                    <td class="py-3 px-6 text-left">
-                        <div class="flex items-center">
-                            {{-- <button wire:click="edit({{ $gasto }})" title="Editar gasto"
-                                class="btn_edit"><i class="fas fa-edit"></i></button> --}}
-                            <button wire:click="destroy({{ $gasto }})" title="Eliminar gasto"
-                                class="btn_delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td>
-                </tr>
-                @php  $i++; @endphp
-                @endforeach
-            </tbody>
-        </table>
+                                    @endif
+                                </ul>
+                            </div>
+                        </td>
+                        <td class="py-3 px-6 text-left">
+                            <div class="flex items-center">
+                                {{-- <button wire:click="edit({{ $gasto }})" title="Editar gasto"
+                                    class="btn_edit"><i class="fas fa-edit"></i></button> --}}
+                                <button wire:click="destroy({{ $gasto }})" title="Eliminar gasto"
+                                    class="btn_delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    @php  $i++; @endphp
+                    @endforeach
+                </tbody>
+            </table>
+            @if ($gastos->hasPages())
+            <div class="px-3 py-3 bg-gray-300">
+                {{ $gastos->links() }}
+            </div>
+        @endif
+        @else
+        <div class="px-3 py-2 bg-gray-300 text-white">
+            No hay gastos que conincidan con su búsqueda
+        </div>
+        @endif
     </div>
 
     @include('admin.gastos.modales.alimento')

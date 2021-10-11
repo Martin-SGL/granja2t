@@ -36,9 +36,12 @@ class Mermas extends Component
 
     public function render()
     {
+        $simbol_month_search = $this->month_search==''?'!=':'=';
+        $simbol_estanque_search = $this->estanque_search==''?'!=':'=';
+
         $total = Merma::sum('cantidad');
-        $mermas = Merma::whereYear('fecha',$this->year)->whereMonth('fecha', 'LIKE', '%' . $this->month_search . '%')
-            ->where('estanque_id', 'LIKE', '%' . $this->estanque_search . '%')
+        $mermas = Merma::whereYear('fecha',$this->year)->whereMonth('fecha',$simbol_month_search,$this->month_search)
+            ->where('estanque_id',$simbol_estanque_search,$this->estanque_search)
             ->orderBy('fecha','desc')
             ->orderBy('id','desc')
             ->paginate($this->pag);

@@ -22,7 +22,7 @@
         <select wire:model="cliente_search" class="input_text w-full ml-2">
             <option value="">Todos los Clientes</option>
             @foreach ($clientes as $cliente)
-                <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
+                <option value="{{$cliente->id}}">{{ $cliente->nombre }}</option>
             @endforeach
         </select>
 

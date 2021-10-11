@@ -42,7 +42,7 @@ class Empleados extends Component
         'salario_dia.required' => 'El campo salario por dia es requerido',
         'salario_dia.max' => 'El campo salario por dia no debe tener mas de 8 digitos',
         'fecha.required' => 'El campo fecha es requerido'
-        
+
     ];
 
     public function mount()
@@ -97,7 +97,7 @@ class Empleados extends Component
         $this->puesto_id = $empleado->puesto_id;
         $this->salario_dia = $empleado->salario_dia;
         $this->fecha  = $empleado->temporadas->last()->fecha;
-        
+
     }
 
     public function update()
@@ -129,7 +129,7 @@ class Empleados extends Component
     {
         $this->open_destroy = true;
         $this->empleado_inicial = $empleado;
-          
+
     }
 
     public function destroy_confirmation()
@@ -144,7 +144,7 @@ class Empleados extends Component
         $this->empleado_inicial = new Empleado();
         $this->reset('open_destroy');
         $this->emit('confirm','Cliente eliminado con exito');
-        
+
     }
 
 
@@ -166,6 +166,6 @@ class Empleados extends Component
         }else{
             $this->emit('confirm','Cliente recontratado con exito');
         }
-       
+
     }
 }

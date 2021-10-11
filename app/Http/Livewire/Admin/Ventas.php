@@ -16,7 +16,7 @@ class Ventas extends Component
     {
         $this->resetPage();
     }
-    
+
     public function mount()
     {
         $this->venta_eliminar = New Venta();
@@ -26,17 +26,19 @@ class Ventas extends Component
 
     public function render()
     {
-        
+        $simbol_month_search = $this->month_search==''?'!=':'=';
+        $simbol_cliente_search = $this->cliente_search==''?'!=':'=';
+
         $clientes = Cliente::all();
-        $ventas = Venta::whereYear('fecha',$this->year)->whereMonth('fecha', 'LIKE', '%' . $this->month_search . '%')
-            ->where('cliente_id', 'LIKE', '%' . $this->cliente_search . '%')
+        $ventas = Venta::whereYear('fecha',$this->year)->whereMonth('fecha',$simbol_month_search,$this->month_search)
+            ->where('cliente_id',$simbol_cliente_search, $this->cliente_search)
             ->orderBy('fecha','desc')
             ->orderBy('id','desc')
             ->paginate($this->pag);
-        
+
         $total = Venta::whereYear('fecha',$this->year)
-        ->whereMonth('fecha', 'LIKE', '%' . $this->month_search . '%')
-        ->where('cliente_id', 'LIKE', '%' . $this->cliente_search . '%')
+        ->whereMonth('fecha',$simbol_month_search,$this->month_search)
+        ->where('cliente_id',$simbol_cliente_search, $this->cliente_search)
         ->sum('total');
 
         return view('livewire.admin.ventas', compact('ventas','clientes','total'));
@@ -45,7 +47,7 @@ class Ventas extends Component
     public function destroy(Venta $venta)
     {
         $this->open_destroy = true;
-        $this->venta_eliminar = $venta;     
+        $this->venta_eliminar = $venta;
     }
 
     public function confirm_destroy()
@@ -54,5 +56,5 @@ class Ventas extends Component
         $this->venta_eliminar = New Venta();
         $this->emit('confirm','Venta eliminada con exito');
     }
-    
+
 }

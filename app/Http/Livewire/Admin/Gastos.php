@@ -8,27 +8,42 @@ use App\Models\Alimento;
 use App\Models\Energia;
 use App\Models\Alevin;
 use App\Models\Vario;
+use Livewire\WithPagination;
 
 class Gastos extends Component
 {
+    use WithPagination;
     public $open_alimento=false, $action_alimento='Agregar', $tipo_alimento='Grano', $precio_alimento, $cantidad_alimento; //variables de alimento
     public $open_energia=false, $action_energia='Agregar', $blower, $pozo, $domestica; //variables de energia
     public $open_alevin=false, $action_alevin='Agregar', $precio_alevin, $cantidad_alevin; //variables de alimento
     public $open_varios=false, $action_varios='Agregar', $precio_varios, $descripcion; //variables de gastos varios
     public $fecha, $recurso='1', $gasto_inicial; //vaiables de gastos
     public $tipo_modal = 1, $open_destroy=false; //variables de modales
+    public $pag=5, $year, $month_search, $gasto_search; //parametros de busqueda
 
     protected $rules = [], $messages = [];
 
     public function mount(){
         $this->fecha = date('Y-m-d');
+        $this->year = date('Y');
         $this->gasto_inicial = new Gasto();
     }
 
     public function render()
     {
-        $gastos = Gasto::all();
-        return view('livewire.admin.gastos',compact('gastos'));
+        $simbol_month_search = $this->month_search==''?'!=':'=';
+        $simbol_gasto_search = $this->gasto_search==''?'!=':'=';
+
+        $total_gasto = Gasto::whereYear('fecha',$this->year)->whereMonth('fecha',$simbol_month_search,$this->month_search)
+        ->where('gastoable_type',$simbol_gasto_search,$this->gasto_search)->sum('total');
+
+        $gastos = Gasto::whereYear('fecha',$this->year)->whereMonth('fecha',$simbol_month_search,$this->month_search)
+        ->where('gastoable_type',$simbol_gasto_search,$this->gasto_search )
+        ->orderBy('fecha','desc')
+        ->orderBy('id','desc')
+        ->paginate($this->pag);
+
+        return view('livewire.admin.gastos',compact('gastos','total_gasto'));
     }
 
     public function modales()

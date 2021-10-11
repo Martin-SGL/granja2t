@@ -3,12 +3,13 @@ namespace App\Http\Livewire\Admin;
 use Livewire\Component;
 use App\Models\Cliente;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 
 class Clientes extends Component
 {
     use WithPagination;
     public $open=false, $open_destroy=false, $search, $pag=10;
-    public $cliente_id, $nombre, $negocio, $telefono, $calle, $numero, $municipio_estado; 
+    public $cliente_id, $nombre, $negocio, $telefono, $calle, $numero, $municipio_estado;
     //Agregar o Editar
     public $action = 'Agregar', $cliente_inicial;
 
@@ -34,7 +35,7 @@ class Clientes extends Component
         'numero.max' => 'El campo numero no debe pasar de 7 dígitos',
         'municipio_estado.required' => 'El campo municipio y estado es requerido',
         'municipio_estado.max' => 'El campo municipio y estado es muy largo'
-        
+
     ];
 
     public function updatingSearch()
@@ -48,9 +49,10 @@ class Clientes extends Component
 
     public function render()
     {
-        $clientes = Cliente::where('nombre','LIKE',"%$this->search%")
-        ->orWhere('negocio', 'LIKE', '%' . $this->search . '%')
-        ->orWhere('telefono', 'LIKE', '%' . $this->search . '%')
+        $seachL = strtolower($this->search);
+        $clientes = Cliente::where(DB::raw("LOWER(nombre)"),'LIKE',"%$seachL%" )
+        ->orWhere(DB::raw("LOWER(negocio)"), 'like', '%' .$seachL . '%')
+        ->orWhere('telefono', 'like', '%' . $seachL . '%')
         ->orderBy('id','desc')
         ->paginate($this->pag);
         return view('livewire.admin.clientes', compact('clientes'));
@@ -85,7 +87,7 @@ class Clientes extends Component
         $this->calle = $cliente->calle;
         $this->numero = $cliente->numero;
         $this->municipio_estado = $cliente->municipio_estado;
-        
+
     }
 
     public function update()
@@ -99,17 +101,17 @@ class Clientes extends Component
             'calle' => $this->calle,
             'numero' => $this->numero,
             'municipio_estado' => $this->municipio_estado]);
-        
+
         $this->reset(['open','nombre','negocio','telefono','calle','numero','municipio_estado']);
         $this->emit('confirm','Cliente actualizado con exito');
-       
+
     }
 
     public function destroy(Cliente $cliente)
     {
         $this->open_destroy = true;
         $this->cliente_inicial = $cliente;
-          
+
     }
 
     public function destroy_confirmation()
@@ -118,7 +120,7 @@ class Clientes extends Component
         $this->cliente_inicial = new Cliente();
         $this->reset('open_destroy');
         $this->emit('confirm','Cliente eliminado con exito');
-        
+
     }
 
     public function init($open=false)
