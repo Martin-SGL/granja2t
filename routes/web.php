@@ -20,6 +20,3 @@ Route::get('/', function () {
 
 Route::get('/admin', [HomeController::class, 'index'])->middleware(['auth:sanctum', 'verified'])->name('admin.index');
 
-// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');
