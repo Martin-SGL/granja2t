@@ -1,6 +1,6 @@
 <div x-data="{open_destroy: @entangle('open_destroy')}">
     <div class="flex w-full pl-2 text-lg italic">
-        <h2>El total de ventas es: <span class="font-bold">$ {{$total}}</span></h2>
+        <h2>El total de ventas es: <span class="font-bold">$ {{number_format($total, 2)}}</span></h2>
     </div>
     <div class="flex w-full mt-2">
         <select wire:model="month_search" class="input_text w-full">

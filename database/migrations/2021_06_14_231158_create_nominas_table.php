@@ -16,7 +16,8 @@ class CreateNominasTable extends Migration
         Schema::create('nominas', function (Blueprint $table) {
             $table->id();
             $table->string('semana',8)->unique();
-            $table->decimal('total', $precision = 8, $scale = 2);
+            $table->date('fecha_ini')->unique();
+            $table->decimal('total', $precision = 10, $scale = 2);
             $table->timestamps();
         });
     }

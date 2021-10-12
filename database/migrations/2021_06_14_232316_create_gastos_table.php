@@ -16,7 +16,7 @@ class CreateGastosTable extends Migration
         Schema::create('gastos', function (Blueprint $table) {
             $table->id();
             $table->date('fecha');
-            $table->decimal('total', $precision = 10, $scale = 2);
+            $table->decimal('total', $precision = 16, $scale = 2);
             $table->enum('recurso', [1,2]); //1= Granja 2T || 2=VQ
             $table->unsignedBigInteger('gastoable_id');
             $table->string('gastoable_type');

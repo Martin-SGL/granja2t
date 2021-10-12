@@ -32,6 +32,7 @@ class NominaController extends Controller
 
         $nomina = Nomina::create([
             'semana' => $request->semana,
+            'fecha_ini' => date("Y-m-d", strtotime($request->semana)),
             'total'=> $total_nomina,
         ]);
         for($i=0;$i<=count($request->id)-1; $i++)
@@ -74,6 +75,7 @@ class NominaController extends Controller
 
         $nomina->update([
             'semana' => $request->semana,
+            'fecha_ini' => date("Y-m-d", strtotime($request->semana)),
             'total'=> $total_nomina,
         ]);
 

@@ -9,7 +9,7 @@ class Nomina extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['semana','total'];
+    protected $fillable = ['semana','fecha_ini','total'];
 
     //relación muchos a muchos
     public function empleados()

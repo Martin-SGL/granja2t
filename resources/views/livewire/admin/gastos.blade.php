@@ -1,7 +1,7 @@
 <div x-data="{open_destroy: @entangle('open_destroy')}">
     <div class="flex items-center justify-end">
         <div class="justify-start w-full">
-            Total de gastos = <span class="font-bold">$ {{$total_gasto}} </span>
+            Total de gastos = <span class="font-bold">${{number_format($total_gasto, 2)}} </span>
         </div>
         <div class="mr-5 w-72">
             Seleccione el tipo de gasto:

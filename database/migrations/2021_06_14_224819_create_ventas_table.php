@@ -19,7 +19,7 @@ class CreateVentasTable extends Migration
             $table->integer('piezas');
             $table->date('fecha');
             $table->decimal('precio',$precision = 8, $scale = 2);
-            $table->decimal('total',$precision = 12, $scale = 2);
+            $table->decimal('total',$precision = 16, $scale = 2);
             $table->unsignedBigInteger('cliente_id');
             $table->unsignedBigInteger('estanque_id');
             $table->timestamps();

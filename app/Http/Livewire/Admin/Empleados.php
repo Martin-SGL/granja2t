@@ -23,7 +23,7 @@ class Empleados extends Component
         'numero' => 'required|max:7',
         'municipio_estado' => 'required|max:45',
         'puesto_id' => 'required',
-        'salario_dia' => 'required|max:8',
+        'salario_dia' => 'required|max:8|not_in:0',
         'fecha' => 'required'
     ];
 
@@ -41,6 +41,7 @@ class Empleados extends Component
         'puesto_id.required' => 'El campo puesto es requerido',
         'salario_dia.required' => 'El campo salario por dia es requerido',
         'salario_dia.max' => 'El campo salario por dia no debe tener mas de 8 digitos',
+        'salario_dia.not_in' => 'El campo salario debe ser mayor a 0',
         'fecha.required' => 'El campo fecha es requerido'
 
     ];
