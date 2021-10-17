@@ -106,7 +106,6 @@
                     <x-main.restaurante/>
                 </div>
                 <x-main.contacto/>
-                <div class="count-particles"> <span class="js-count-particles">--</span> particles </div>
             </main>
         </div>
     </body>
