@@ -1,12 +1,12 @@
 <nav id="inicio" x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-2 py-2 sm:px-6 lg:px-8">
-        <div class="flex h-16">
+    <div class="max-w-7xl mx-auto py-2 px-8">
+        <div class="flex h-8">
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <img src="{{asset('img/1.jpg')}}" width="100px">
-                    <div class="w-96 mt-2 italic text-2xl font-bold text-red-500">Granja Doble T</div>
+                    <img src="{{asset('img/1.jpg')}}" width="70px">
+                    <div class="w-96 mt-2 italic text-lg font-bold text-red-500">Granja Doble T</div>
                 </div>
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex w-full ">
@@ -26,14 +26,13 @@
                             </span>
                         </a>
                     @else
-                        <a class="flex mt-2 ml-2" href="{{ route('login') }}" class="text-sm text-gray-700">
-                            <i class="far fa-user mr-2 mt-1"></i>
+                        <a class="flex items-center text-xs" href="{{ route('login') }}">
+                            <i class="far fa-user mr-2"></i>
                             <span class="hidden md:flex">
                                 Iniciar sesión
                             </span>
                         </a>
                     @endif
-
                 </div>
             </div>
         </div>

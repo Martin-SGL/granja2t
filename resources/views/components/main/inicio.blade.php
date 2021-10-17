@@ -1,8 +1,8 @@
-<div class=" px-16 grid md:grid-cols-2 w-full bg-fixed bg-no-repeat bg-cover bg-center items-center text-white " style="background-image: url({{asset('img/2.jpg')}});height:  calc(100vh - 137px); ">
+<div class=" px-16 grid md:grid-cols-2 w-full bg-fixed bg-no-repeat bg-cover bg-center items-center text-white " style="background-image: url({{asset('img/2.jpg')}});height:  calc(100vh - 85px); ">
     <div>
-        <h1 class="text-4xl font-bold">Bienvenido a Granja Doble T </h1>
-        <div class="text-lg font-semibold italic">La mejor calidad de tilapia</div>
-        <p class="text-justify text-lg mt-4 font-serif">
+        <h1 class="text-2xl font-bold">Bienvenido a Granja Doble T </h1>
+        <div class="text-md font-semibold italic">La mejor calidad de tilapia</div>
+        <p class="text-justify text-sm mt-4 font-serif">
             Granja Doble T somos una empresa especialista en la producción de
             <a href="">
                 <span class="italic text-red-600">Tilapia Roja</span>

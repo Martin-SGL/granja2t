@@ -3,7 +3,7 @@
       <!--Slide 1-->
       <input class="carousel-open hidden" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden=""
         checked="checked">
-      <div class="carousel-item absolute opacity-0 bg-center" style="height:500px; background-image: url({{asset('img/c_instalaciones/1.jpg')}});background-repeat:no-repeat;background-size: cover;">
+      <div class="carousel-item absolute opacity-0 bg-center" style="height:400px; background-image: url({{asset('img/c_instalaciones/1.jpg')}});background-repeat:no-repeat;background-size: cover;">
 
       </div>
       <label for="carousel-3"
@@ -15,7 +15,7 @@
 
       <!--Slide 2-->
       <input class="carousel-open hidden" type="radio" id="carousel-2" name="carousel" aria-hidden="true" hidden="">
-      <div class="carousel-item absolute opacity-0 bg-center" style="height:500px; background-image: url({{asset('img/c_instalaciones/3.jpg')}});background-repeat:no-repeat;background-size: cover;">
+      <div class="carousel-item absolute opacity-0 bg-center" style="height:400px; background-image: url({{asset('img/c_instalaciones/3.jpg')}});background-repeat:no-repeat;background-size: cover;">
       </div>
       <label for="carousel-1"
         class=" control-2 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 left-0 my-auto"><i
@@ -26,7 +26,7 @@
 
       <!--Slide 3-->
       <input class="carousel-open hidden" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
-      <div class="carousel-item absolute opacity-0" style="height:500px; background-image: url({{asset('img/c_instalaciones/4.jpg')}});background-repeat:no-repeat;background-size: cover;">
+      <div class="carousel-item absolute opacity-0" style="height:400px; background-image: url({{asset('img/c_instalaciones/4.jpg')}});background-repeat:no-repeat;background-size: cover;">
       </div>
       <label for="carousel-2"
         class="control-3 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 left-0 my-auto"><i
