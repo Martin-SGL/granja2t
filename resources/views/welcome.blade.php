@@ -32,12 +32,6 @@
             transition: opacity 0.6s ease-out;
             }
 
-            #carousel-1:checked~.control-1,
-            #carousel-2:checked~.control-2,
-            #carousel-3:checked~.control-3 {
-            display: block;
-            }
-
             .carousel-indicators {
             list-style: none;
             margin: 0;
@@ -50,11 +44,47 @@
             z-index: 10;
             }
 
+            /*Instalaciones*/
+            #carousel-1:checked~.control-1,
+            #carousel-2:checked~.control-2,
+            #carousel-3:checked~.control-3 {
+            display: block;
+            }
+
             #carousel-1:checked~.control-1~.carousel-indicators li:nth-child(1) .carousel-bullet,
             #carousel-2:checked~.control-2~.carousel-indicators li:nth-child(2) .carousel-bullet,
             #carousel-3:checked~.control-3~.carousel-indicators li:nth-child(3) .carousel-bullet {
             color: #2b6cb0;
-            /*Set to match the Tailwind colour you want the active one to be */
+            }
+
+            /*Restaurante*/
+            #carousel-r-1:checked~.control-1,
+            #carousel-r-2:checked~.control-2,
+            #carousel-r-3:checked~.control-3 {
+            display: block;
+            }
+
+            #carousel-r-1:checked~.control-1~.carousel-indicators li:nth-child(1) .carousel-bullet,
+            #carousel-r-2:checked~.control-2~.carousel-indicators li:nth-child(2) .carousel-bullet,
+            #carousel-r-3:checked~.control-3~.carousel-indicators li:nth-child(3) .carousel-bullet {
+            color: #2b6cb0;
+
+            }
+            /*Juegos*/
+            #carousel-j-1:checked~.control-1,
+            #carousel-j-2:checked~.control-2,
+            #carousel-j-3:checked~.control-3 {
+            display: block;
+            }
+
+            #carousel-j-1:checked~.control-1~.carousel-indicators li:nth-child(1) .carousel-bullet,
+            #carousel-j-2:checked~.control-2~.carousel-indicators li:nth-child(2) .carousel-bullet,
+            #carousel-j-3:checked~.control-3~.carousel-indicators li:nth-child(3) .carousel-bullet {
+            color: #2b6cb0;
+            }
+
+            #medio{
+                background: linear-gradient(125deg, #ECFCFF 0%, #ECFCFF 40%, #B2FCFF calc(40% + 1px), #B2FCFF 60%, #5EDFFF calc(60% + 1px), #5EDFFF 72%, #3E64FF calc(72% + 1px), #3E64FF 100%);
             }
         </style>
     </head>
@@ -63,20 +93,21 @@
         <!--<div class="min-h-screen bg-gray-100">-->
         <div class="bg-gray-100"
             x-data="{active:'inicio'}"
-            @scroll.window="active = document.querySelector('#producto').getBoundingClientRect().top <= 300 ? 'producto' :
-            (document.querySelector('#restaurante').getBoundingClientRect().top <= 300 ? 'restaurante':
+            @scroll.window="active = document.querySelector('#contacto').getBoundingClientRect().top <= 500 ? 'contacto' :
+            (document.querySelector('#restaurante').getBoundingClientRect().top <=300 ? 'restaurante':
             (document.querySelector('#instalaciones').getBoundingClientRect().top <= 300 ? 'instalaciones' : 'inicio'))">
             <x-header.main/>
             <x-header.menu/>
             <!-- Page Content -->
             <main>
                 <x-main.inicio/>
-                <x-main.instalaciones/>
-                <x-main.restaurante/>
-                <x-main.producto/>
+                <div id="medio">
+                    <x-main.instalaciones/>
+                    <x-main.restaurante/>
+                </div>
+                <x-main.contacto/>
+                <div class="count-particles"> <span class="js-count-particles">--</span> particles </div>
             </main>
         </div>
-
-        @stack('modals')
     </body>
 </html>
