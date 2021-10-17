@@ -1,4 +1,4 @@
-<div x-data="{open_destroy: @entangle('open_destroy')}" @keyup.espace="alert('hola')">
+<div x-data="{open_destroy: @entangle('open_destroy')}" @keyup.espace="alert('hola')" class="text-sm">
     <div class="bg-white shadow-md rounded p-2 flex justify-between">
         <div class="mt-2">
             Total de nominas: <span class="font-bold">$ {{number_format($total_nominas, 2)}} </span>

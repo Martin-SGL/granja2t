@@ -16,7 +16,7 @@
         <option value="12">Diciembre</option>
     </select>
    </div>
-   <div class="w-full flex items-center p-3 rounded shadow mt-5 text-2xl lg:text-4xl {{($total_utilidad<0?"text-red-600":'')}}">
+   <div class="w-full flex items-center p-3 rounded shadow mt-5 text-md lg:text-2xl {{($total_utilidad<0?"text-red-600":'')}}">
        <div class="p-3 w-24 text-center">
             <i class="fas fa-hand-holding-usd"></i>
        </div>
@@ -31,7 +31,7 @@
         </div>
    </div>
 
-   <div class="w-full flex items-center p-3 rounded shadow mt-5 bg-green-500 text-white text-2xl lg:text-4xl">
+   <div class="w-full flex items-center p-3 rounded shadow mt-5 bg-green-500 text-white text-md lg:text-2xl">
         <div class="p-3 w-24 text-center">
             <i class="fas fa-dollar-sign"></i>
         </div>
@@ -46,7 +46,7 @@
         </div>
    </div>
 
-   <div class="w-full flex items-center p-3 rounded shadow mt-5 bg-red-500 text-white text-2xl lg:text-4xl">
+   <div class="w-full flex items-center p-3 rounded shadow mt-5 bg-red-500 text-white text-md lg:text-2xl">
         <div class="p-3 w-24 text-center">
             <i class="fas fa-money-check-alt"></i>
         </div>
@@ -61,7 +61,7 @@
         </div>
    </div>
 
-   <div class="w-full flex items-center p-3 rounded shadow mt-5 bg-red-500 text-white text-2xl lg:text-4xl">
+   <div class="w-full flex items-center p-3 rounded shadow mt-5 bg-red-500 text-white text-md lg:text-2xl">
         <div class="p-3 w-24 text-center">
             <i class="fas fa-funnel-dollar"></i>
         </div>

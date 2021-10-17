@@ -1,5 +1,5 @@
-<div x-data="{open_destroy: @entangle('open_destroy')}">
-    <div class="flex w-full pl-2 text-lg italic">
+<div x-data="{open_destroy: @entangle('open_destroy')}" class="text-sm">
+    <div class="flex w-full pl-2 italic">
         <h2>El total de ventas es: <span class="font-bold">$ {{number_format($total, 2)}}</span></h2>
     </div>
     <div class="flex w-full mt-2">

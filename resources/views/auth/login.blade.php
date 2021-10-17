@@ -22,16 +22,16 @@
 <body>
     <div class="w-screen h-screen flex flex-col items-center justify-center">
         <div class="t">
-            <a href="{{ route('home')}}" class="text-2xl" title="regresar a inicio">
+            <a href="{{ route('home')}}" class="text-xl" title="regresar a inicio">
                 <i class="fas fa-home"></i>
             </a>
         </div>
-        <div class="md:w-100 w-4/5 px-5 py-5 rounded-lg shadow-xl">
+        <div class="w-2/6 px-5 py-5 rounded-lg shadow-xl">
         <div class="text-center">
-            <div class="text-2xl font-bold italic">
+            <div class="text-lg font-bold italic">
                 Granja Doble T
             </div>
-            <div>
+            <div class="text-xs">
                 inicio de sesión
             </div>
         </div>
@@ -48,12 +48,12 @@
 
             <div>
                 <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <x-jet-input id="email" class="block mt-2  text-xs w-full" type="email" name="email" :value="old('email')" required autofocus />
             </div>
 
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                <x-jet-input id="password" class="block mt-2 text-xs w-full" type="password" name="password" required autocomplete="current-password" />
             </div>
 
             <div class="flex items-center justify-end mt-4">
@@ -63,8 +63,10 @@
                     </a>
                 @endif
 
-                <x-jet-button class="ml-4">
-                    {{ __('Iniciar sesión') }}
+                <x-jet-button class="w-42">
+                    <div class="text-2xs">
+                        Iniciar sesión
+                    </div>
                 </x-jet-button>
             </div>
         </form>
