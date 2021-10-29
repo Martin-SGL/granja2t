@@ -1,4 +1,4 @@
-<div id='instalaciones' class="lg:h-screen w-full flex flex-col items-center text-center lg:pt-10">
+<div id='instalaciones' class="lg:h-screen w-full flex flex-col items-center text-center mt-1 lg:pt-10">
      <div class="grid grid-cols-1 lg:grid-cols-2 content-center gap-x-3 gap-y-3 items-center w-11/12 mx-auto px-2 sm:px-6 lg:px-8" style="margin-top: 50px;">
         <div class="lg:col-span-2 w-full items-center mb-2 italic text-sm">
             <span class="font-bold">Granja Doble T </span> se ubica a 10 minutos de la ciudad de Armería y contramos con todo el equipo y  herramientas necesarias para ofrecer
