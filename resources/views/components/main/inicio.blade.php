@@ -8,8 +8,7 @@
                 <span class="italic text-red-400 font-bold">Tilapia Roja</span>
             </a>,
             contamos con más de 8 años de experiencia en su crianza basados en estandares
-            de calidad e innocuidad
-            .
+            de calidad e innocuidad.
         </p>
     </div>
 </div>
