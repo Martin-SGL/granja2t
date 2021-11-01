@@ -27,7 +27,7 @@
                 <i class="fas fa-home"></i>
             </a>
         </div>
-        <div class="w-96 px-5 py-5 rounded-lg shadow-xl">
+        <div class="w-80 px-5 py-5 rounded-lg shadow-xl">
             <div class="text-center">
                 <div class="text-lg font-bold italic">
                     Granja Doble T

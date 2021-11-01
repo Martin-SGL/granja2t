@@ -4,8 +4,8 @@
         <div class="text-md font-semibold italic">La mejor calidad de tilapia</div>
         <p class="text-justify text-sm mt-4 font-serif">
             Granja Doble T somos una empresa especialista en la producción de
-            <a href="">
-                <span class="italic text-red-600">Tilapia Roja</span>
+            <a href="https://es.wikipedia.org/wiki/Tilapia#Tilapia_roja_(Oreochromis_mossambicus)">
+                <span class="italic text-red-400 font-bold">Tilapia Roja</span>
             </a>,
             contamos con más de 8 años de experiencia en su crianza basados en estandares
             de calidad e innocuidad

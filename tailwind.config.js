@@ -13,6 +13,9 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            fontSize: {
+                'xss':'10px',
+              },
             spacing:{
                 '100':'28rem',
                 '104':'32rem',
