@@ -32,13 +32,18 @@
     <span class="text-sm text-red-600">{{ $message }}</span>
     @enderror
 </div>
-<div @if(isset($venta)) x-data="{kilos:{{$venta->kilos}}, precio:{{$venta->precio}}, total:{{$venta->total}}}"
-    @else   x-data="{kilos:{{ old('kilos') ? old('kilos') : 0 }},
-                     precio:{{ old('precio') ? old('precio') : 0 }}, total}"
+<div @if(isset($venta)) x-data="{venta:{{$venta->peizas}},kilos:{{$venta->kilos}}, precio:{{$venta->precio}}, total:{{$venta->total}}}"
+    @else   x-data="{ 
+                    piezas:{{old('piezas') ? old('piezas'): 0
+                }},
+                    kilos:{{ old('kilos') ? old('kilos') : 0 }},
+                    precio:{{ old('precio') ? old('precio') : 0 }}, 
+                    total
+                }"
     @endif  class="mt-3 grid sm:grid-cols-4 gap-x-3">
     <div>
         {!! Form::label('piezas', 'Piezas: ', ['class'=>'font-bold']) !!}
-        {!! Form::number('piezas', 0, ['class'=>'input_text w-full mt-2']) !!}
+        {!! Form::number('piezas', null, ['class'=>'input_text w-full mt-2','x-model'=>'piezas']) !!}
         @error('piezas')
         <span class="text-sm text-red-600">{{ $message }}</span>
         @enderror
