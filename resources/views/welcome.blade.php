@@ -86,11 +86,29 @@
             #medio{
                 background: linear-gradient(125deg, #ECFCFF 0%, #ECFCFF 40%, #B2FCFF calc(40% + 1px), #B2FCFF 60%, #5EDFFF calc(60% + 1px), #5EDFFF 72%, #3E64FF calc(72% + 1px), #3E64FF 100%);
             }
+
+            .carga_back{
+                background: rgb(255,255,255);
+                background: linear-gradient(61deg, rgba(255,255,255,1) 11%, rgba(0,146,204,1) 49%, rgba(89,0,204,1) 85%);
+            }
         </style>
     </head>
     <body class="font-sans antialiased">
+        <!--Spiner -->
+        <div id="contenedor_carga" class="transition-all duration-500  absolute z-20 flex flex-col h-screen w-full items-center justify-center italic font-semibold carga_back">
+            <div class="mt-2 italic text-xl font-bold text-red-900">
+                Granja Doble T
+            </div>
+            <div class="text-md">
+                Cargando...
+            </div>
+            <div class="flex justify-center items-center mt-3">
+                <div class="animate-spin rounded-full h-32 w-32 border-b-4 border-red-500">
+                </div>
+            </div>
+        </div>
 
-        <!--<div class="min-h-screen bg-gray-100">-->
+        <!-- Contenido de la página -->
         <div class="bg-gray-100"
             x-data="{active:'inicio'}"
             @scroll.window="active = document.querySelector('#contacto').getBoundingClientRect().top <= 500 ? 'contacto' :
@@ -98,7 +116,6 @@
             (document.querySelector('#instalaciones').getBoundingClientRect().top <= 300 ? 'instalaciones' : 'inicio'))">
             <x-header.main/>
             <x-header.menu/>
-            <!-- Page Content -->
             <main>
                 <x-main.inicio/>
                 <div id="medio">
@@ -107,6 +124,14 @@
                 </div>
                 <x-main.contacto/>
             </main>
+
         </div>
+        <script>
+            window.onload = function(){
+                let contenedor = document.getElementById("contenedor_carga");
+                contenedor.style.visibility = "hidden";
+                contenedor.style.opacity = "0";
+            }
+        </script>
     </body>
 </html>
